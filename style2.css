@@ -1,131 +1,160 @@
-.required-star {
-    color: red;
-    margin-left: 4px;
-}
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
 
-.gender-options {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    margin-top: 8px;
-    flex-wrap: wrap;
-}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>טופס שידוכים</title>
+    <link rel="stylesheet" href="style2.css">
 
-.gender-options label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 8px 16px;
-    background-color: #e0e0e0;
-    /* צבע רקע אחיד */
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-}
+</head>
 
-.gender-options label:hover {
-    background-color: #d0d0d0;
-}
+<body>
 
-.gender-options input[type="radio"] {
-    accent-color: #333;
-    /* צבע הרדיו אם נתמך בדפדפן */
-}
+    <h2>טופס לי בבצים תודה ומלכו ימנייא</h2>
 
-@media (max-width: 600px) {
-    .gender-options {
-        display: flex;
-        flex-direction: row;
-        gap: 12px;
-    }
+    <form autocomplete="off">
+        <label><span class="required-star">*</span>מין:</label>
+        <div class="gender-options">
+            <label><input type="radio" name="gender" value="זכר" required> זכר</label>
+            <label><input type="radio" name="gender" value="נקבה" required> נקבה</label>
+        </div>
+        <br><br><br><br>
+        <div class="form-group">
+            <label><span class="required-star">*</span> מצב משפחתי:</label>
+            <select name="maritalStatus" required>
+                <option value="">בחר מצב משפחתי</option>
+                <option value="רווק">רווק/ה</option>
+                <option value="גרוש">גרוש/ה</option>
+                <option value="אלמן">אלמן/ה</option>
+                <option value="נשוי">נשוי/ה</option>
+                <option value="פרוד">פרוד/ה</option>
+            </select>
+        </div>
 
-    .gender-options label {
-        font-size: 18px;
-    }
-}
+        <br><br><br><br>
+        <label><span class="required-star">*</span>ילדים:</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="children" value="יש ילדים" required> יש ילדים</label>
+            <label><input type="checkbox" name="children" value="אין ילדים" required> אין ילדים</label>
+        </div>
+        <br><br><br><br>
+        <div class="form-group">
+            <label for="name">
+                <span class="required-star">*</span>שם:
+            </label>
+            <input type="text" id="name" name="name" placeholder="הכנס/י שם מלא" required>
+        </div>
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
-}
+        <br><br><br><br>
+        <div class="form-group">
+            <label for="age">
+                <span class="required-star">*</span>גיל:
+            </label>
+            <input type="number" id="age" name="age" min="18" max="99" placeholder="לדוגמה: 25" required>
+        </div>
+        <br><br><br><br>
+        <label><span class="required-star">*</span>גובה (בס"מ):</label>
+        <select name="height" required>
+            <option value="">בחר גובה</option>
+            <script>
+                for (let i = 140; i <= 210; i++) {
+                    document.write(`<option value="${i}">${i} ס"מ</option>`);
+                }
+            </script>
+        </select>
+        <br><br><br><br>
+        <label><span class="required-star">*</span>איזור מגורים:</label>
+        <select name="region" required>
+            <option value="">בחר איזור</option>
+            <option value="צפון">צפון</option>
+            <option value="מרכז">מרכז</option>
+            <option value="דרום">דרום</option>
+        </select>
+        <br><br><br><br>
+        <div class="relative">
+            <input type="text" id="cityInput" placeholder="לדוגמה: צפת" required />
+            <div id="citySuggestions" class="autocomplete-suggestions"></div>
+        </div>
+
+        <br><br><br><br>
+
+        <label><span class="required-star">*</span>עדה:</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="ethnicity" value="אשכנזי" required> אשכנזי</label>
+            <label><input type="checkbox" name="ethnicity" value="ספרדי" required> ספרדי</label>
+            <label><input type="checkbox" name="ethnicity" value="תימני" required> תימני</label>
+            <label><input type="checkbox" name="ethnicity" value="מרוקאי" required> מרוקאי</label>
+            <label><input type="checkbox" name="ethnicity" value="עיראקי" required> עיראקי</label>
+            <label><input type="checkbox" name="ethnicity" value="פרסי" required> פרסי</label>
+            <label><input type="checkbox" name="ethnicity" value="כורדי" required> כורדי</label>
+            <label><input type="checkbox" name="ethnicity" value="רוסי" required> רוסי</label>
+            <label><input type="checkbox" name="ethnicity" value="אתיופי" required> אתיופי</label>
+            <label><input type="checkbox" name="ethnicity" value="מיצרי" required>מיצרי</label>
+        </div>
+        <br><br><br><br>
+        <label><span class="required-star">*</span>תעסוקה:</label>
+        <textarea name="occupation" rows="2" placeholder="לדוגמה: מורה, עצמאי, מהנדס וכו'" required></textarea>
+
+        <label><span class="required-star">*</span>עישון:</label>
+        <div class="checkbox-group">
+            <label><input type="radio" name="smoking" value="מעשן" required> מעשן</label>
+            <label><input type="radio" name="smoking" value="לא מעשן" required> לא מעשן</label>
+            <label><input type="radio" name="smoking" value="מנסה להפסיק" required> מנסה להפסיק</label>
+        </div>
+        <br><br><br><br>
+        <label><span class="required-star">*</span>דברים חשובים שיהיה (בצד השני):</label>
+        <textarea name="importantInPartner" rows="3" placeholder="לדוגמה: ערכים, נאמנות, שמחת חיים..."
+            required></textarea>
+        <br><br><br><br>
+        <label><span class="required-star">*</span>דברים חשובים שידעו עליי:</label>
+        <textarea name="importantAboutMe" rows="3" placeholder="שתף/י משהו מיוחד או אישי..." required></textarea>
+        <br><br><br><br>
+        <label><span class="required-star">*</span>מצב בריאותי:</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="health" value="בריא" required> בריא</label>
+            <label><input type="checkbox" name="health" value="לא בריא" required> לא בריא</label>
+        </div>
+        <br><br><br><br>
+        <label><span class="required-star">*</span>פירוט מצב בריאותי:</label>
+        <textarea name="healthDetails" rows="2" placeholder="אם יש מצב רפואי מסוים, אפשר לפרט כאן..."
+            required></textarea>
+        <br><br><br><br>
+        <label><span class="required-star">*</span>השקפה שאת/ה מחפשים:</label>
+        <textarea name="ideology" rows="2" placeholder="לדוגמה: השקפה דתית, השקפת עולם, וכו'" required></textarea>
+        <br><br><br><br>
+        <label><span class="required-star">*</span>טווח גילאים רצוי:</label>
+        <div style="display: flex; gap: 10px;">
+            <input type="number" name="ageMin" placeholder="מינימום" min="18" max="99" style="flex: 1;" required>
+            <input type="number" name="ageMax" placeholder="מקסימום" min="18" max="99" style="flex: 1;" required>
+        </div>
+        <br><br><br><br>
+        <label><span class="required-star">*</span>רמה דתית:</label>
+        <textarea name="religiousLevel" rows="2" placeholder="לדוגמה: חרדי, דתי לאומי, מסורתי, חילוני וכו'"
+            required></textarea>
+        <br><br><br><br>
+        <p style="font-size: xx-large; font-weight: bolder; color: red;">פרטים לשדכן בלבד</p>
+        <br><br><br><br>
+        <label><span class="required-star">*</span>מספר טלפון:</label>
+        <input type="tel" name="phone" placeholder="לדוגמה: 050-1234567" required>
+        <br><br><br><br>
+        <label><span class="required-star">*</span>אימייל:</label>
+        <input type="email" name="email" placeholder="example@email.com" required>
+        <br><br><br><br>
+        <label><span class="required-star">*</span>העלאת קובץ-צילום תעודת זהות כולל ספח<br>(😄כדי להימנע מאי
+            נעימות😄):</label>
+        <input type="file" name="idImage" accept="image/*" required>
+        <br><br><br><br>
+        <!-- המשך הקוד נשאר כפי שהוא -->
+
+        <br><br>
+        <button type="submit">שלח</button>
+    </form>
 
 
-.required-star {
-    color: red;
-    margin-left: 4px;
-}
+    <script src="all_cities_cleaned.js"></script>
+    <script src="script.js"></script>
 
-select {
-    width: 250px;
-    /* קובע רוחב קבוע */
-    max-width: 100%;
-    /* מונע גלישה במסכים קטנים */
-    padding: 10px 20px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    font-size: x-large;
-    font-weight: bolder;
-    height: 90px;
-}
+</body>
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
-}
-
-
-
-.required-star {
-    color: red;
-    margin-left: 4px;
-}
-
-.checkbox-group {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.checkbox-group label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #f0f0f0;
-    padding: 10px 14px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.checkbox-group label:hover {
-    background-color: #e0e0e0;
-}
-
-@media (max-width: 600px) {
-    .checkbox-group {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .checkbox-group label {
-        font-size: 18px;
-    }
-}
-
-form label {
-    display: block;
-    font-weight: bolder;
-    font-size: 32px;
-    color: #333;
-    margin-bottom: 8px;
-    line-height: 1.6;
-    max-width: 60%;
-}
+</html>

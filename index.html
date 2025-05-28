@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אתר שידוכים</title>
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+
+
+    <h1><strong>ברוכים הבאים לאתר השידוכים שלנו</strong></h1>
+
+    <div class="content">
+        <p>אנחנו נותנים מענה טלפוני עם מענה מהיר וליווי ועזרה טלפונית.</p>
+        <p><strong>ללא עלות הרשמה עד לסגירת הוורט.</strong></p>
+        <p>במידה וניסגר – העלות היא <strong>4000 ש"ח מכל צד.</strong></p>
+    </div>
+
+
+    <label class="checkbox-container">
+        <input type="checkbox" id="agree">
+        <span class="custom-checkbox"></span>
+        אני מאשר שקראתי ואני מסכים להתנאים
+        <span class="required-star">*</span>
+    </label>
+    <input type="text" id="cityInput" placeholder="הכנס עיר">
+    <div id="citySuggestions" class="suggestions-box"></div>
+
+    <!-- הכפתור ללא onclick -->
+    <button class="register-btn" id="registerBtn">הרשמה</button>
+
+    <script src="all_cities_cleaned.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

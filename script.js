@@ -38,7 +38,7 @@ document.getElementById("registerBtn").addEventListener("click", function () {
     const checkbox = document.getElementById("agree");
 
     if (checkbox.checked) {
-        window.location.href = "next-page.html";
+        window.location.href = "Registration card.html";
     } else {
         alert("עליך לאשר את התנאים לפני המשך ההרשמה.");
     }

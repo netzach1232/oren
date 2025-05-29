@@ -1,4 +1,44 @@
-/* סגנון כללי לטופס */
+/* ✅ עטיפת שדה חובה */
+.field-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+/* ✅ באנר שגיאה מדויק */
+.error-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #ffdddd;
+    color: #a00;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    z-index: 100;
+    font-family: 'Heebo', sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+    direction: rtl;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ✅ עיצוב טופס כללי */
 form {
     max-width: 500px;
     margin: auto;
@@ -12,7 +52,6 @@ form {
     }
 }
 
-/* תוויות */
 form label {
     display: block;
     font-weight: bold;
@@ -22,17 +61,9 @@ form label {
     line-height: 1.6;
 }
 
-/* כוכבית חובה */
 .required-star {
     color: red;
     margin-left: 4px;
-}
-
-/* קבוצת שדות */
-.form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
 }
 
 input[type="text"],
@@ -60,7 +91,6 @@ textarea:focus {
     outline: none;
 }
 
-/* סגנון תיבת בחירה */
 select {
     appearance: none;
     background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
@@ -70,61 +100,52 @@ select {
     padding-left: 40px;
 }
 
-/* סגנון gender-options */
-.gender-options {
+.gender-options,
+.checkbox-group {
     display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 8px;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
-.gender-options label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 16px;
+.gender-options label,
+.checkbox-group label {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    padding: 8px 16px;
     background-color: #e0e0e0;
+    padding: 14px 20px;
     border-radius: 10px;
     transition: background-color 0.3s ease;
+    text-align: center;
+    box-sizing: border-box;
 }
 
-.gender-options label:hover {
+.gender-options label:hover,
+.checkbox-group label:hover {
     background-color: #d0d0d0;
 }
 
-.gender-options input[type="radio"] {
+.gender-options input[type="radio"],
+.checkbox-group input[type="radio"] {
     accent-color: rgb(68, 0, 255);
 }
 
-/* קבוצת תיבות סימון */
 .checkbox-group {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #fefefe;
+    margin-bottom: 20px;
 }
 
-.checkbox-group label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #f0f0f0;
-    padding: 10px 14px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.checkbox-group label:hover {
-    background-color: #e0e0e0;
-}
-
-
-/* התאמה למסכים קטנים */
+/* ✅ התאמות מובייל */
 @media (max-width: 600px) {
 
     .gender-options,
@@ -144,23 +165,14 @@ select {
     }
 }
 
+/* ✅ תיבות טקסט */
 textarea {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    font-size: 1rem;
-    background-color: #f9f9f9;
-    transition: border-color 0.3s ease;
-    width: 100%;
-    box-sizing: border-box;
     resize: none;
     min-height: 100px;
     height: 140px;
-    /* גובה קבוע */
-    /* ✅ כולם באותו גובה מינימלי */
 }
 
-/* כפתור שליחה */
+/* ✅ כפתור שליחה */
 button[type="submit"] {
     background-color: #007bff;
     color: white;
@@ -177,27 +189,7 @@ button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-
-textarea:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-.checkbox-group {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    padding: 15px;
-    border: 1px solid #ccc;
-    /* ✅ קו דק */
-    border-radius: 12px;
-    /* ✅ פינות מעוגלות */
-    background-color: #fefefe;
-    /* אופציונלי */
-    margin-bottom: 20px;
-    /* מרווח מהשדה הבא */
-}
-
+/* ✅ עיצוב כותרת */
 .title1 {
     font-family: 'Rubik', sans-serif;
     font-size: 2.5rem;
@@ -210,7 +202,6 @@ textarea:focus {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     animation: fadeInDown 1.5s ease-out;
     opacity: 0;
     animation-fill-mode: forwards;
@@ -235,41 +226,158 @@ textarea:focus {
     }
 }
 
-.p1 {
-    font-family: 'Heebo', sans-serif;
-    /* פונט עברי נקי ומודרני */
-    font-size: 2rem;
-    /* גודל פונט גדול, שווה ל-xx-large */
-    font-weight: 700;
-    /* משקל עבה, שווה ל-bolder */
-    color: #c0392b;
-    /* אדום כהה ואלגנטי במקום אדום בוהק */
-    text-align: center;
-    /* מרכז את הטקסט */
-    margin: 1.5rem 0;
-    /* רווח מסביב */
-    padding: 0.8rem;
-    /* ריפוד פנימי */
-    background-color: #fff5f5;
-    /* רקע אדום בהיר ועדין */
-    border: 2px solid #e74c3c;
-    /* מסגרת אדומה תואמת */
-    border-radius: 10px;
-    /* פינות מעוגלות */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    /* צל עדין */
-    letter-spacing: 1px;
-    /* ריווח קל בין האותיות */
-    transition: all 0.3s ease;
-    /* אנימציה חלקה */
+/* ✅ תיבת קובץ מותאמת */
+.custom-file {
+    position: relative;
+    display: inline-block;
+    direction: rtl;
 }
 
-/* אפקט הובר לאינטראקטיביות */
+.custom-file input[type="file"] {
+    opacity: 0;
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+.custom-file-label {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px 16px;
+    background-color: #f9f9f9;
+    display: inline-block;
+    min-width: 200px;
+}
+
+/* ✅ הצעות עיר */
+#citySuggestions {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    margin-top: 5px;
+    max-width: 100%;
+    padding: 0;
+}
+
+.suggestion-item {
+    padding: 10px 16px;
+    font-size: 16px;
+    color: #2c3e50;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+    color: #007bff;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.selected-city-box {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.city-tag {
+    background-color: #dbeafe;
+    color: #1e40af;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.city-tag .close-btn {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ✅ כותרת לשדכן */
+.p1 {
+    font-family: 'Heebo', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #c0392b;
+    text-align: center;
+    margin: 1.5rem 0;
+    padding: 0.8rem;
+    background-color: #fff5f5;
+    border: 2px solid #e74c3c;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
 .p1:hover {
     transform: scale(1.02);
-    /* הגדלה קלה */
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    /* צל מוגבר */
     background-color: #ffe6e6;
-    /* רקע מעט בהיר יותר */
+}
+
+.gender-options {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #fefefe;
+    margin-bottom: 20px;
+}
+
+.custom-file {
+    position: relative;
+    width: 100%;
+    direction: rtl;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.custom-file input[type="file"] {
+    opacity: 0;
+    position: relative;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.custom-file-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 10px 16px;
+    background-color: #f9f9f9;
+    width: 50%;
+    max-width: 400px;
+    font-size: 30px;
+    font-weight: bolder;
+    color: #ff0202;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-file-label:hover {
+    background-color: #f0f0f0;
 }

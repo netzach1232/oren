@@ -34,12 +34,56 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-document.getElementById("registerBtn").addEventListener("click", function () {
+window.onload = function () {
+    const button = document.getElementById("registerBtn");
     const checkbox = document.getElementById("agree");
 
-    if (checkbox.checked) {
-        window.location.href = "Registration card.html";
-    } else {
-        alert("עליך לאשר את התנאים לפני המשך ההרשמה.");
+    if (button && checkbox) {
+        button.addEventListener("click", function () {
+            if (checkbox.checked) {
+                window.location.href = "Registration card.html";
+            } else {
+                alert("עליך לאשר את התנאים לפני המשך ההרשמה.");
+            }
+        });
     }
-});
+};
+
+
+window.onload = () => {
+    const minAgeSelect = document.getElementById("ageMin");
+    const maxAgeSelect = document.getElementById("ageMax");
+
+    // אם אחד מהם לא קיים – לא נמשיך
+    if (!minAgeSelect || !maxAgeSelect) return;
+
+    // מלא את גיל מינימום
+    for (let age = 18; age <= 65; age++) {
+        const opt = document.createElement("option");
+        opt.value = age;
+        opt.textContent = age;
+        minAgeSelect.appendChild(opt);
+    }
+
+    minAgeSelect.addEventListener("change", () => {
+        const minAge = parseInt(minAgeSelect.value);
+        maxAgeSelect.innerHTML = "";
+
+        const defaultOpt = document.createElement("option");
+        defaultOpt.value = "";
+        defaultOpt.textContent = "גיל מקסימום";
+        maxAgeSelect.appendChild(defaultOpt);
+
+        if (!isNaN(minAge)) {
+            maxAgeSelect.disabled = false;
+            for (let age = minAge; age <= 65; age++) {
+                const opt = document.createElement("option");
+                opt.value = age;
+                opt.textContent = age;
+                maxAgeSelect.appendChild(opt);
+            }
+        } else {
+            maxAgeSelect.disabled = true;
+        }
+    });
+};

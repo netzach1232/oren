@@ -60,18 +60,6 @@ textarea:focus {
     outline: none;
 }
 
-textarea {
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    font-size: 1rem;
-    background-color: #f9f9f9;
-    transition: border-color 0.3s ease;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-
 /* סגנון תיבת בחירה */
 select {
     appearance: none;
@@ -135,11 +123,6 @@ select {
     background-color: #e0e0e0;
 }
 
-/* תיבות טקסט */
-textarea {
-    resize: none;
-    max-height: fit-content;
-}
 
 /* התאמה למסכים קטנים */
 @media (max-width: 600px) {
@@ -161,6 +144,22 @@ textarea {
     }
 }
 
+textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    resize: none;
+    min-height: 100px;
+    height: 140px;
+    /* גובה קבוע */
+    /* ✅ כולם באותו גובה מינימלי */
+}
+
 /* כפתור שליחה */
 button[type="submit"] {
     background-color: #007bff;
@@ -178,16 +177,6 @@ button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-textarea {
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    font-size: 1rem;
-    background-color: #f9f9f9;
-    transition: border-color 0.3s ease;
-    width: 100%;
-    box-sizing: border-box;
-}
 
 textarea:focus {
     border-color: #007bff;
@@ -199,8 +188,88 @@ textarea:focus {
     gap: 20px;
     flex-wrap: wrap;
     padding: 15px;
-    border: 1px solid #ccc; /* ✅ קו דק */
-    border-radius: 12px;     /* ✅ פינות מעוגלות */
-    background-color: #fefefe; /* אופציונלי */
-    margin-bottom: 20px;     /* מרווח מהשדה הבא */
+    border: 1px solid #ccc;
+    /* ✅ קו דק */
+    border-radius: 12px;
+    /* ✅ פינות מעוגלות */
+    background-color: #fefefe;
+    /* אופציונלי */
+    margin-bottom: 20px;
+    /* מרווח מהשדה הבא */
+}
+
+.title1 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    text-align: center;
+    margin: 2rem 0;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInDown 1.5s ease-out;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+@media (min-width: 1024px) {
+    .title1 {
+        max-width: 500px;
+        margin: 2rem auto;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-80px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.p1 {
+    font-family: 'Heebo', sans-serif;
+    /* פונט עברי נקי ומודרני */
+    font-size: 2rem;
+    /* גודל פונט גדול, שווה ל-xx-large */
+    font-weight: 700;
+    /* משקל עבה, שווה ל-bolder */
+    color: #c0392b;
+    /* אדום כהה ואלגנטי במקום אדום בוהק */
+    text-align: center;
+    /* מרכז את הטקסט */
+    margin: 1.5rem 0;
+    /* רווח מסביב */
+    padding: 0.8rem;
+    /* ריפוד פנימי */
+    background-color: #fff5f5;
+    /* רקע אדום בהיר ועדין */
+    border: 2px solid #e74c3c;
+    /* מסגרת אדומה תואמת */
+    border-radius: 10px;
+    /* פינות מעוגלות */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* צל עדין */
+    letter-spacing: 1px;
+    /* ריווח קל בין האותיות */
+    transition: all 0.3s ease;
+    /* אנימציה חלקה */
+}
+
+/* אפקט הובר לאינטראקטיביות */
+.p1:hover {
+    transform: scale(1.02);
+    /* הגדלה קלה */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    /* צל מוגבר */
+    background-color: #ffe6e6;
+    /* רקע מעט בהיר יותר */
 }

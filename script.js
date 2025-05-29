@@ -1,40 +1,41 @@
-
 document.addEventListener("DOMContentLoaded", function () {
+    // תיבת חיפוש עיר
     const cityInput = document.getElementById("cityInput");
     const suggestionsBox = document.getElementById("citySuggestions");
 
-    cityInput.addEventListener("input", () => {
-        const val = cityInput.value.toLowerCase();
-        suggestionsBox.innerHTML = "";
-
-        if (!val) return;
-
-        const matches = cities.filter(city =>
-            city.toLowerCase().includes(val)
-        );
-
-        matches.slice(0, 20).forEach(city => {
-            const div = document.createElement("div");
-            div.textContent = city;
-            div.style.cursor = "pointer";
-            div.style.padding = "5px";
-            div.style.borderBottom = "1px solid #ccc";
-            div.addEventListener("click", () => {
-                cityInput.value = city;
-                suggestionsBox.innerHTML = "";
-            });
-            suggestionsBox.appendChild(div);
-        });
-    });
-
-    document.addEventListener("click", (e) => {
-        if (!cityInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+    if (cityInput && suggestionsBox) {
+        cityInput.addEventListener("input", () => {
+            const val = cityInput.value.toLowerCase();
             suggestionsBox.innerHTML = "";
-        }
-    });
-});
 
-window.onload = function () {
+            if (!val) return;
+
+            const matches = cities.filter(city =>
+                city.toLowerCase().includes(val)
+            );
+
+            matches.slice(0, 20).forEach(city => {
+                const div = document.createElement("div");
+                div.textContent = city;
+                div.style.cursor = "pointer";
+                div.style.padding = "5px";
+                div.style.borderBottom = "1px solid #ccc";
+                div.addEventListener("click", () => {
+                    cityInput.value = city;
+                    suggestionsBox.innerHTML = "";
+                });
+                suggestionsBox.appendChild(div);
+            });
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!cityInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+                suggestionsBox.innerHTML = "";
+            }
+        });
+    }
+
+    // מעבר לעמוד הבא בלחיצה
     const button = document.getElementById("registerBtn");
     const checkbox = document.getElementById("agree");
 
@@ -47,7 +48,8 @@ window.onload = function () {
             }
         });
     }
-};
+});
+
 
 
 window.onload = () => {

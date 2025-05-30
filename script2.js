@@ -1,81 +1,78 @@
-const cityInput = document.getElementById("cityInput");
-const suggestionsBox = document.getElementById("citySuggestions");
-// --- הצעות ערים ---
-cityInput.addEventListener("input", () => {
-    const val = cityInput.value.trim().toLowerCase();
-    suggestionsBox.innerHTML = "";
+document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("cityInput");
+    const suggestionsBox = document.getElementById("citySuggestions");
+    const selectedBox = document.getElementById("selectedCityBox");
+    const hiddenInput = document.getElementById("selectedCityHidden");
 
-    if (!val) {
-        suggestionsBox.style.display = "none";
-        return;
-    }
+    const selectedCities = new Set();
 
-    const matches = cities.filter(city =>
-        city.toLowerCase().startsWith(val)
-    );
+    input.addEventListener("input", function () {
+        const value = this.value.trim().toLowerCase();
+        suggestionsBox.innerHTML = "";
 
-    matches.slice(0, 20).forEach(city => {
-        const div = document.createElement("div");
-        div.textContent = city;
-        div.className = "suggestion-item";
-        div.addEventListener("click", () => {
-            cityInput.value = "";
-            suggestionsBox.innerHTML = "";
+        if (value.length < 1) {
             suggestionsBox.style.display = "none";
+            return;
+        }
+
+        const filtered = cities.filter(city =>
+            city.toLowerCase().startsWith(value)
+        );
+
+        if (filtered.length === 0) {
+            suggestionsBox.style.display = "none";
+            return;
+        }
+
+        filtered.slice(0, 20).forEach(city => {
+            const item = document.createElement("div");
+            item.className = "suggestion-item";
+            item.textContent = city;
+
+            item.addEventListener("click", () => {
+                if (!selectedCities.has(city)) {
+                    selectedCities.add(city);
+                    addSelectedCityTag(city);
+                    input.value = "";
+                }
+                suggestionsBox.style.display = "none";
+            });
+
+            suggestionsBox.appendChild(item);
         });
-        suggestionsBox.appendChild(div);
+
+        suggestionsBox.style.display = "block";
     });
 
-    suggestionsBox.style.display = matches.length ? "block" : "none";
-});
+    function addSelectedCityTag(cityName) {
+        const tag = document.createElement("div");
+        tag.className = "city-tag";
 
-// --- גילאים ---
-window.onload = () => {
-    const minAgeSelect = document.getElementById("ageMin");
-    const maxAgeSelect = document.getElementById("ageMax");
-    if (!minAgeSelect || !maxAgeSelect) return;
-    for (let age = 18; age <= 65; age++) {
-        const opt = document.createElement("option");
-        opt.value = age;
-        opt.textContent = age;
-        minAgeSelect.appendChild(opt);
+        const text = document.createElement("span");
+        text.textContent = cityName;
+
+        const closeBtn = document.createElement("span");
+        closeBtn.className = "close-btn";
+        closeBtn.innerHTML = "&times;";
+        closeBtn.addEventListener("click", () => {
+            tag.remove();
+            selectedCities.delete(cityName);
+            hiddenInput.value = Array.from(selectedCities).join(",");
+        });
+
+        tag.appendChild(text);
+        tag.appendChild(closeBtn);
+        selectedBox.appendChild(tag);
+        hiddenInput.value = Array.from(selectedCities).join(",");
     }
-    minAgeSelect.addEventListener("change", () => {
-        const minAge = parseInt(minAgeSelect.value);
-        maxAgeSelect.innerHTML = "";
-        const defaultOpt = document.createElement("option");
-        defaultOpt.value = "";
-        defaultOpt.textContent = "גיל מקסימום";
-        maxAgeSelect.appendChild(defaultOpt);
-        if (!isNaN(minAge)) {
-            maxAgeSelect.disabled = false;
-            for (let age = minAge; age <= 65; age++) {
-                const opt = document.createElement("option");
-                opt.value = age;
-                opt.textContent = age;
-                maxAgeSelect.appendChild(opt);
-            }
-        } else {
-            maxAgeSelect.disabled = true;
-        }
-    });
-};
 
-// --- Enter בשדה עיר ---
-cityInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        e.preventDefault();
-        const firstSuggestion = suggestionsBox.querySelector(".suggestion-item");
-        if (firstSuggestion) {
-            firstSuggestion.click();
-        } else if (cityInput.value.trim()) {
-            addSelectedCity(cityInput.value.trim());
-            cityInput.value = "";
-            suggestionsBox.innerHTML = "";
+    document.addEventListener("click", function (e) {
+        if (!e.target.closest(".field-wrapper")) {
             suggestionsBox.style.display = "none";
         }
-    }
+    });
 });
+
 
 // --- ולידציה ---
 document.addEventListener("DOMContentLoaded", () => {
@@ -161,5 +158,26 @@ function updateFileName(input) {
         label.textContent = input.files[0].name;
     } else {
         label.textContent = "לא נבחר קובץ";
+    }
+}
+
+
+// מאזין לשינוי הבחירה ברדיו
+document.querySelectorAll('input[name="uploadTarget"]').forEach(radio => {
+    radio.addEventListener("change", () => {
+        const uploadSection = document.getElementById("uploadImageField");
+        uploadSection.style.display = "block";
+    });
+});
+
+// מעדכן את תווית הקובץ
+function updateFileName(input) {
+    const label = document.getElementById("fileLabel");
+    if (input.files.length > 0) {
+        label.textContent = input.files.length === 1
+            ? input.files[0].name
+            : `${input.files.length} קבצים נבחרו 📷`;
+    } else {
+        label.textContent = "לא נבחר קובץ להעלה 📷";
     }
 }

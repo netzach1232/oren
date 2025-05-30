@@ -6,38 +6,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>אתר שידוכים</title>
     <link rel="stylesheet" href="style.css">
-
-
 </head>
 
 <body>
 
+    <body>
+        <div class="content1"
+            style="font-family: 'Rubik', sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); text-align: center;">
+            <h1
+                style="font-size: 2.4em; color: #2c3e50; font-weight: 700; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">
+                <strong>ברוכים הבאים לאתר השידוכים שלנו</strong>
+            </h1>
 
-    <h1><strong>ברוכים הבאים לאתר השידוכים שלנו</strong></h1>
+            <div style="font-size: 1.4em; color: #34495e; line-height: 1.8;">
+                <p style="margin: 15px 0;">אנחנו נותנים <strong style="color: #e74c3c;">מענה טלפוני</strong> עם מענה
+                    מהיר וליווי ועזרה טלפונית.</p>
+                <p style="margin: 15px 0; font-weight: 600; color: #27ae60;"><strong>ללא עלות הרשמה עד לסגירת
+                        הוורט.</strong></p>
+                <p style="margin: 15px 0;">במידה וניסגר – העלות היא <strong style="color: #2980b9;">4000 ש"ח מכל
+                        צד.</strong></p>
+            </div>
+        </div>
+        <br><br><br>
+        <!-- שאר התוכן... -->
+        <div class="field-wrapper"
+            style="font-family: 'Rubik', sans-serif; max-width: 300px; margin: 0 auto; padding: 30px; background: linear-gradient(135deg, #ffffff 0%, #e6ecf5 100%); border-radius: 12px; box-shadow: 0 6px 12px rgba(0,0,0,0.15); text-align: center;">
+            <label for="cityInput"
+                style="display: block; font-size: 1.3em; color: #2c3e50; font-weight: 600; margin-bottom: 10px;">
+                <span class="required-star" style="color: #e74c3c;">*</span> עיר
+            </label>
+            <input type="text" id="cityInput" placeholder="הכנס עיר" autocomplete="off"
+                style="width: 100%; padding: 12px; font-size: 1.1em; color: #34495e; border: 2px solid #dcdcdc; border-radius: 8px; outline: none; transition: border-color 0.3s ease;"
+                onfocus="this.style.borderColor='#2980b9';" onblur="this.style.borderColor='#dcdcdc';">
+            <input type="hidden" id="selectedCityHidden" name="city" required>
+            <div id="citySuggestions" class="suggestions-box"
+                style="width: 100%; max-height: 150px; overflow-y: auto; background: #fff; border: 1px solid #dcdcdc; border-radius: 8px; margin-top: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: none;">
+            </div>
+            <div id="selectedCityBox" class="selected-city-boxes"
+                style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; justify-content: center;"></div>
 
-    <div class="content">
-        <p>אנחנו נותנים מענה טלפוני עם מענה מהיר וליווי ועזרה טלפונית.</p>
-        <p><strong>ללא עלות הרשמה עד לסגירת הוורט.</strong></p>
-        <p>במידה וניסגר – העלות היא <strong>4000 ש"ח מכל צד.</strong></p>
-    </div>
+        </div>
 
 
-    <label class="checkbox-container">
-        <input type="checkbox" id="agree">
-        <span class="custom-checkbox"></span>
-        אני מאשר שקראתי ואני מסכים להתנאים
-        <span class="required-star">*</span>
-    </label>
-    <input type="text" id="cityInput" placeholder="הכנס עיר">
-    <div id="citySuggestions" class="suggestions-box"></div>
 
-    <!-- הכפתור ללא onclick -->
-    <button class="register-btn" id="registerBtn">הרשמה</button>
+        <br><br>
+        <br><br>
+        <!-- עטיפת צ'קבוקס -->
+        <div class="field-wrapper"
+            style="font-family: 'Rubik', sans-serif; max-width: 500px; margin: 0 auto; padding: 20px; background: linear-gradient(135deg, #d5dbe600 0%, #dfe4ea00 100%); border-radius: 12px;  text-align: center;">
+            <label class="checkbox-container"
+                style="display: inline-flex; align-items: center; font-size: 1.3em; color: #2c3e50; font-weight: 600; cursor: pointer;">
+                <input type="checkbox" id="agree" style="display: none;">
+                <span class="custom-checkbox"
+                    style="width: 24px; height: 24px; border: 2px solid #2980b9; border-radius: 6px; margin-left: 10px; display: inline-block; position: relative; background: #fff; transition: background-color 0.3s ease;">
+                    <span
+                        style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 16px; color: #fff;">✔</span>
+                </span>
+                <span style="color: #34495e;">אני מאשר שקראתי ואני מסכים <strong
+                        style="color: #e74c3c;">לתנאים</strong></span>
+                <span class="required-star" style="color: #e74c3c; margin-right: 5px;">*</span>
+            </label>
+        </div>
 
-    <script src="all_cities_cleaned.js"></script>
 
-    <script src="script.js"></script>
 
-</body>
+
+        <button class="register-btn" id="registerBtn">הרשמה</button>
+
+
+        <script src="all_cities_cleaned.js"></script>
+        <script src="script.js"></script>
+
+    </body>
 
 </html>

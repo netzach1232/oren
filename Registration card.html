@@ -28,13 +28,25 @@
         </div>
         <br><br>
         <div class="field-wrapper">
+            <label><span class="required-star">*</span> מצב משפחתי:</label>
+            <select name="maritalStatus" required>
+                <option value="">בחר מצב משפחתי</option>
+                <option value="רווק">רווק/ה</option>
+                <option value="גרוש">גרוש/ה</option>
+                <option value="אלמן">אלמן/ה</option>
+                <option value="נשוי">נשוי/ה</option>
+                <option value="פרוד">פרוד/ה</option>
+            </select>
+        </div>
+        <br><br>
+        <div class="field-wrapper">
             <label><span class="required-star">*</span>ילדים:</label>
             <div class="checkbox-group">
                 <label><input type="radio" name="children" value="יש ילדים" required> יש ילדים</label>
                 <label><input type="radio" name="children" value="אין ילדים" required> אין ילדים</label>
             </div>
         </div>
-        <br><br><br>
+        <br><br>
         <div class="field-wrapper">
             <span style="font-size: 21px; color: red;">*</span><span style="font-size: large; font-weight: bolder;">בחר
                 גובה:</span>
@@ -42,7 +54,7 @@
                 <option value="">בחר גובה</option>
             </select>
         </div>
-        <br><br><br><br>
+        <br><br>
         <div class="field-wrapper">
             <label><span class="required-star">*</span>איזור מגורים:</label>
             <select name="region" required>
@@ -52,7 +64,7 @@
                 <option value="דרום">דרום</option>
             </select>
         </div>
-        <br><br><br><br><br>
+        <br><br>
         <div class="field-wrapper relative">
             <span style="color: red; font-weight: bolder; font-size: large;">*</span><span style="font-size: larger;">
                 עיר</span>
@@ -87,8 +99,10 @@
             </div>
         </div>
         <br><br>
-        <label>תעסוקה:</label>
-        <textarea name="occupation" rows="2" placeholder="לדוגמה: מורה, עצמאי, מהנדס וכו'"></textarea>
+        <div class="field-wrapper">
+            <label><span class="required-star">*</span>תעסוקה:</label>
+            <textarea name="occupation" rows="2" placeholder="לדוגמה: מורה, עצמאי, מהנדס וכו'" required></textarea>
+        </div>
         <br><br>
         <label>(אופציונלי)<br>דברים חשובים שיהיה בצד השני:</label>
         <textarea name="importantInPartner" rows="3" placeholder="לדוגמה: ערכים, נאמנות, שמחת חיים..."></textarea>
@@ -125,24 +139,14 @@
         </div>
         <br><br>
         <div class="field-wrapper">
-            <label><span class="required-star">*</span> מצב משפחתי:</label>
-            <select name="maritalStatus" required>
-                <option value="">בחר מצב משפחתי</option>
-                <option value="רווק">רווק/ה</option>
-                <option value="גרוש">גרוש/ה</option>
-                <option value="אלמן">אלמן/ה</option>
-                <option value="נשוי">נשוי/ה</option>
-                <option value="פרוד">פרוד/ה</option>
-            </select>
-        </div>
-        <br><br>
-        <div class="field-wrapper">
             <label><span class="required-star">*</span>רמה דתית:</label>
             <textarea name="religiousLevel" rows="2" placeholder="לדוגמה: חרדי, דתי לאומי, מסורתי, חילוני וכו'"
                 required></textarea>
         </div>
         <br><br><br><br>
-        <p class="p1">פרטים לשדכן בלבד</p>
+        <p class="p1">פרטים לשדכן <br>&#9660; <!-- ▼ -->
+            בלבד &#9660; <!-- ▼ -->
+        </p>
         <div class="field-wrapper">
             <label><span class="required-star">*</span>מספר טלפון:</label>
             <input style="text-align: right;" type="tel" name="phone" placeholder="מספר טלפון" required>

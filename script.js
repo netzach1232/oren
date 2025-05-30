@@ -3,11 +3,17 @@ function removeErrorBanners() {
 }
 
 function showErrorBanner(targetElement, message) {
+    // הסרה מראש אם כבר יש באנר
+    const existing = targetElement.querySelector(".error-banner");
+    if (existing) existing.remove();
+
     const error = document.createElement("div");
     error.className = "error-banner";
     error.textContent = message;
+    error.style.marginTop = "8px"; // קצת ריווח
     targetElement.appendChild(error);
 }
+
 
 (function setupCityAutocomplete() {
     const input = document.getElementById("cityInput");
@@ -74,14 +80,18 @@ document.getElementById("registerBtn").addEventListener("click", function () {
         isValid = false;
     }
 
-    // בדיקת עיר (אם לא נבחרה)
-    if (cityInput.value.trim() === "") {
+    // בדיקת אם העיר נבחרה מתוך ההשלמה האוטומטית
+    if (selectedCity.value.trim() === "") {
         const fieldWrapper = cityInput.closest(".field-wrapper");
-        showErrorBanner(fieldWrapper, "יש לבחור עיר");
+        showErrorBanner(fieldWrapper, "יש לבחור עיר מתוך הרשימה");
         isValid = false;
-    } else {
+    }
+    else {
         cityInput.setCustomValidity(""); // מנקה שגיאה אם נבחרה עיר
     }
+
+
+
 
     if (!isValid) return;
 

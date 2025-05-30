@@ -1,4 +1,3 @@
-
 /* ✅ כוכבית שדה חובה */
 .required-star {
     color: red;
@@ -241,8 +240,10 @@ body.transitioning *:not(.register-btn) {
 }
 
 .field-wrapper .error-banner {
-    display: inline-block; /* שיתאים לגודל התוכן או האלמנט */
-    max-width: 100%; /* לא יעבור את גבול הקופסה */
+    display: inline-block;
+    /* שיתאים לגודל התוכן או האלמנט */
+    max-width: 100%;
+    /* לא יעבור את גבול הקופסה */
     margin-top: 8px;
     background-color: #ffdddd;
     color: #a00;
@@ -254,8 +255,10 @@ body.transitioning *:not(.register-btn) {
     direction: rtl;
     animation: fadeIn 0.3s ease;
     text-align: right;
-    white-space: normal; /* כדי שירד שורה אם צריך */
-    word-wrap: break-word; /* שבירה אוטומטית */
+    white-space: normal;
+    /* כדי שירד שורה אם צריך */
+    word-wrap: break-word;
+    /* שבירה אוטומטית */
 }
 
 

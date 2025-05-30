@@ -77,16 +77,17 @@
         <div class="field-wrapper">
             <label><span class="required-star">*</span>עדה:</label>
             <div class="checkbox-group">
-                <label><input type="radio" name="ethnicity" value="אשכנזי" required> אשכנזי</label>
-                <label><input type="radio" name="ethnicity" value="ספרדי" required> ספרדי</label>
-                <label><input type="radio" name="ethnicity" value="תימני" required> תימני</label>
-                <label><input type="radio" name="ethnicity" value="מרוקאי" required> מרוקאי</label>
-                <label><input type="radio" name="ethnicity" value="עיראקי" required> עיראקי</label>
-                <label><input type="radio" name="ethnicity" value="פרסי" required> פרסי</label>
-                <label><input type="radio" name="ethnicity" value="כורדי" required> כורדי</label>
-                <label><input type="radio" name="ethnicity" value="רוסי" required> רוסי</label>
-                <label><input type="radio" name="ethnicity" value="אתיופי" required> אתיופי</label>
-                <label><input type="radio" name="ethnicity" value="מיצרי" required> מיצרי</label>
+                <label><input type="checkbox" name="ethnicity" value="אשכנזי" required> אשכנזי</label>
+                <label><input type="checkbox" name="ethnicity" value="ספרדי" required> ספרדי</label>
+                <label><input type="checkbox" name="ethnicity" value="תימני" required> תימני</label>
+                <label><input type="checkbox" name="ethnicity" value="מרוקאי" required> מרוקאי</label>
+                <label><input type="checkbox" name="ethnicity" value="עיראקי" required> עיראקי</label>
+                <label><input type="checkbox" name="ethnicity" value="פרסי" required> פרסי</label>
+                <label><input type="checkbox" name="ethnicity" value="כורדי" required> כורדי</label>
+                <label><input type="checkbox" name="ethnicity" value="רוסי" required> רוסי</label>
+                <label><input type="checkbox" name="ethnicity" value="אתיופי" required> אתיופי</label>
+                <label><input type="checkbox" name="ethnicity" value="מיצרי" required> מיצרי</label>
+                <label><input type="checkbox" name="ethnicity" value="אחר" required> אחר</label>
             </div>
         </div>
         <br><br>
@@ -143,6 +144,34 @@
             <textarea name="religiousLevel" rows="2" placeholder="לדוגמה: חרדי, דתי לאומי, מסורתי, חילוני וכו'"
                 required></textarea>
         </div>
+        <br><br>
+        <div class="field-wrapper upload-target-field">
+            <label class="upload-target-label">
+                <span class="required-star">*</span> לאן תרצה להעלות את התמונות?
+            </label>
+            <div class="upload-target-options">
+                <label>
+                    <input type="radio" name="uploadTarget" value="website" required>
+                    לאתר (גלוי לכולם)
+                </label>
+                <label>
+                    <input type="radio" name="uploadTarget" value="matchmaker" required>
+                    לשדכן (בלבד)
+                </label>
+            </div>
+        </div>
+
+        <!-- שדה העלאת תמונות מוסתר בהתחלה -->
+        <div class="field-wrapper" id="uploadImageField" style="display: none;">
+            <label>
+                <span class="required-star">*</span> העלאת תמונות<br>(עד 3 תמונות)<br>
+            </label>
+            <div class="custom-file">
+                <label class="custom-file-label" id="fileLabel">לא נבחר קובץ להעלה 📷</label>
+                <input type="file" name="idImage" accept="image/*" required onchange="updateFileName(this)">
+            </div>
+        </div>
+
         <br><br><br><br>
         <p class="p1">פרטים לשדכן <br>&#9660; <!-- ▼ -->
             בלבד &#9660; <!-- ▼ -->
@@ -170,6 +199,7 @@
     </form>
 
     <script src="script2.js"></script>
+    <script src="script3.js"></script>
     <script src="all_cities_cleaned.js"></script>
 </body>
 

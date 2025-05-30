@@ -103,29 +103,45 @@ select {
 .gender-options,
 .checkbox-group {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    /* מתחיל מימין ב־RTL */
+    align-items: flex-start;
     gap: 12px;
-    width: 100%;
-    max-width: 100%;
     box-sizing: border-box;
+    width: 100%;
+
+    /* זה מצמיד לשמאל במסמך RTL */
 }
 
 .gender-options label,
 .checkbox-group label {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    padding: 10px 14px;
+    min-width: 90px;
+    /* ברירת מחדל למחשב */
     background-color: #e0e0e0;
-    padding: 14px 20px;
     border-radius: 10px;
+    cursor: pointer;
+    white-space: nowrap;
     transition: background-color 0.3s ease;
     text-align: center;
-    box-sizing: border-box;
 }
+
+/* ✅ הגדלת האורך רק בטלפונים */
+@media screen and (max-width: 768px) {
+
+    .gender-options label,
+    .checkbox-group label {
+        min-width: 90%;
+
+    }
+
+}
+
 
 .gender-options label:hover,
 .checkbox-group label:hover {
@@ -252,10 +268,14 @@ button[type="submit"]:hover {
     min-width: 200px;
 }
 
-/* ✅ הצעות עיר */
 #citySuggestions {
     display: none;
     position: absolute;
+    width: 70%;
+    top: 100%;
+    /* ישר מתחת לשדה הקלט */
+    right: 0;
+    left: 0;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -264,9 +284,13 @@ button[type="submit"]:hover {
     overflow-y: auto;
     z-index: 1000;
     margin-top: 5px;
-    max-width: 100%;
     padding: 0;
+    /* ✅ הסתרת סרגל גלילה בכל הדפדפנים */
+    -ms-overflow-style: none;
+    /* IE ו־Edge */
+    scrollbar-width: none;
 }
+
 
 .suggestion-item {
     padding: 10px 16px;
@@ -346,17 +370,22 @@ button[type="submit"]:hover {
     width: 100%;
     direction: rtl;
     margin-bottom: 20px;
-    display: flex;
     justify-content: center;
 }
 
 .custom-file input[type="file"] {
     opacity: 0;
-    position: relative;
-    inset: 0;
+    position: absolute;
+    /* 🔁 שינוי חשוב */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     cursor: pointer;
+    z-index: 2;
+    /* לוודא שהוא מעל הכפתור */
 }
 
 .custom-file-label {
@@ -372,12 +401,10 @@ button[type="submit"]:hover {
     max-width: 400px;
     font-size: 30px;
     font-weight: bolder;
-    color: #ff0202;
+    color: #dd3d3d;
     cursor: pointer;
     transition: background-color 0.3s ease;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.custom-file-label:hover {
-    background-color: #f0f0f0;
+    position: relative;
+    z-index: 1;
 }

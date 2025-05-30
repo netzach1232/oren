@@ -1,22 +1,3 @@
-.field-wrapper {
-    position: relative;
-    width: auto;
-    max-width: 300px;
-    margin: 0 auto 20px auto;
-}
-
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-50%) scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(-50%) scale(1);
-    }
-}
 
 /* ✅ כוכבית שדה חובה */
 .required-star {
@@ -260,6 +241,8 @@ body.transitioning *:not(.register-btn) {
 }
 
 .field-wrapper .error-banner {
+    display: inline-block; /* שיתאים לגודל התוכן או האלמנט */
+    max-width: 100%; /* לא יעבור את גבול הקופסה */
     margin-top: 8px;
     background-color: #ffdddd;
     color: #a00;
@@ -271,8 +254,10 @@ body.transitioning *:not(.register-btn) {
     direction: rtl;
     animation: fadeIn 0.3s ease;
     text-align: right;
-    width: auto;
+    white-space: normal; /* כדי שירד שורה אם צריך */
+    word-wrap: break-word; /* שבירה אוטומטית */
 }
+
 
 /* אנימציה להופעה חלקה */
 @keyframes fadeIn {

@@ -91,8 +91,6 @@ document.getElementById("registerBtn").addEventListener("click", function () {
     }
 
 
-
-
     if (!isValid) return;
 
     // מעבר דף עם אפקט

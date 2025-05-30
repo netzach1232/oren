@@ -408,3 +408,56 @@ button[type="submit"]:hover {
     position: relative;
     z-index: 1;
 }
+
+.upload-target-field {
+    font-family: 'Rubik', sans-serif;
+    background: #f9fbfc;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    /* יישור לאמצע */
+    text-align: right;
+    border: 2px solid #c5b8b88e;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(119, 206, 218, 0.452);
+
+    /* תוכן פנימי למרכז אופקי */
+}
+
+
+.upload-target-label {
+    display: block;
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #2c3e50;
+    font-size: 30px;
+
+}
+
+.upload-target-options label {
+    display: block;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 2px solid #dcdcdc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1em;
+    background: #fff;
+
+}
+
+.upload-target-options input[type="radio"] {
+    margin-left: 10px;
+    transform: scale(1.2);
+}
+
+.upload-target-options label:hover {
+    background-color: #ecf0f1;
+    border-color: #2980b9;
+}

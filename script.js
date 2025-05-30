@@ -9,33 +9,83 @@ function showErrorBanner(targetElement, message) {
     targetElement.appendChild(error);
 }
 
-document.getElementById("registerBtn").addEventListener("click", function () {
-    removeErrorBanners(); // שלב ראשון – נקה שגיאות קודמות
+(function setupCityAutocomplete() {
+    const input = document.getElementById("cityInput");
+    const suggestionsBox = document.getElementById("citySuggestions");
+    const selectedBox = document.getElementById("selectedCityBox");
+    const hiddenInput = document.getElementById("selectedCityHidden");
 
-    const checkbox = document.getElementById("agree");
-    const btn = this;
-    const requiredInputs = document.querySelectorAll('input[required]:not([type="hidden"])');
-    let isValid = true;
+    input.addEventListener("input", function () {
+        const value = this.value.trim().toLowerCase();
+        suggestionsBox.innerHTML = "";
 
-    // בדיקת שדות חובה
-    requiredInputs.forEach(input => {
-        const fieldWrapper = input.closest(".field-wrapper") || input.parentElement;
-        if (input.value.trim() === "") {
-            showErrorBanner(fieldWrapper, "שדה זה חובה");
-            isValid = false;
+        if (value.length < 1) {
+            suggestionsBox.style.display = "none";
+            return;
         }
+
+        const filtered = cities.filter(city => city.toLowerCase().startsWith(value));
+
+        if (filtered.length === 0) {
+            suggestionsBox.style.display = "none";
+            return;
+        }
+
+        filtered.slice(0, 20).forEach(city => {
+            const item = document.createElement("div");
+            item.textContent = city;
+            item.style.padding = "8px 12px";
+            item.style.cursor = "pointer";
+            item.style.borderBottom = "1px solid #eee";
+            item.addEventListener("click", () => {
+                input.value = city;
+                hiddenInput.value = city;
+                input.setCustomValidity(""); // מנקה שגיאה אם הייתה
+                selectedBox.textContent = `העיר שנבחרה: ${city}`;
+                selectedBox.style.display = "block";
+                suggestionsBox.style.display = "none";
+            });
+            suggestionsBox.appendChild(item);
+        });
+
+        suggestionsBox.style.display = "block";
     });
 
-    // בדיקת הסכמה לתנאים
+    document.addEventListener("click", function (e) {
+        if (!e.target.closest(".field-wrapper")) {
+            suggestionsBox.style.display = "none";
+        }
+    });
+})();
+
+document.getElementById("registerBtn").addEventListener("click", function () {
+    removeErrorBanners();
+
+    const checkbox = document.getElementById("agree");
+    const cityInput = document.getElementById("cityInput");
+    const selectedCity = document.getElementById("selectedCityHidden");
+    const btn = this;
+    let isValid = true;
+
+    // בדיקת צ'קבוקס
     if (!checkbox.checked) {
         const checkboxWrapper = checkbox.closest(".field-wrapper") || checkbox.parentElement;
         showErrorBanner(checkboxWrapper, "יש לאשר את התנאים לפני ההרשמה");
         isValid = false;
     }
 
+    // בדיקת עיר (אם לא נבחרה)
+    if (cityInput.value.trim() === "") {
+        const fieldWrapper = cityInput.closest(".field-wrapper");
+        showErrorBanner(fieldWrapper, "יש לבחור עיר");
+        isValid = false;
+    } else {
+        cityInput.setCustomValidity(""); // מנקה שגיאה אם נבחרה עיר
+    }
+
     if (!isValid) return;
 
-    // אם הכל תקין → הרץ אפקט ומעבר עמוד
+    // מעבר דף עם אפקט
     document.body.classList.add("transitioning");
     btn.classList.add("expand-fullscreen");
 

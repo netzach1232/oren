@@ -1,0 +1,288 @@
+.field-wrapper {
+    position: relative;
+    width: auto;
+    max-width: 300px;
+    margin: 0 auto 20px auto;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+/* ✅ כוכבית שדה חובה */
+.required-star {
+    color: red;
+    margin-right: 4px;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+/* ✅ שדה טקסט */
+input[type="text"] {
+    width: 70%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: block;
+}
+
+#citySuggestions {
+    display: none;
+    position: relative;
+    top: 75%;
+    right: 0;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    margin-top: 8px;
+    direction: rtl;
+    text-align: right;
+    -ms-overflow-style: none;
+    /* IE ו־Edge */
+    scrollbar-width: none;
+}
+
+
+.suggestion-item {
+    padding: 10px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
+
+.register-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 24px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 100px;
+
+    display: flex;
+    justify-content: center;
+    /* יישור אופקי */
+    align-items: center;
+    /* יישור אנכי */
+    text-align: center;
+}
+
+.register-btn:hover {
+    background-color: #0056b3;
+}
+
+/* ✅ צ'קבוקס בהתאמה אישית */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+}
+
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #555;
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+}
+
+.checkbox-container input[type="checkbox"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.checkbox-container input[type="checkbox"]:checked+.custom-checkbox::after {
+    content: "#";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff00008f;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* ✅ רספונסיביות */
+@media screen and (min-width: 768px) {
+    .register-btn {
+        font-size: 20px;
+        padding: 14px 28px;
+    }
+
+    .checkbox-container {
+        font-size: 18px;
+    }
+
+    input[type="text"] {
+        font-size: 18px;
+    }
+}
+
+
+.selected-city-box {
+    margin-top: 10px;
+    padding: 7px 16px;
+    background-color: #1359dbc4;
+    color: #fff8f8;
+    border: 1px solid #bbb;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    direction: rtl;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+}
+
+.selected-city-box .close-btn {
+    background: none;
+    border: none;
+    color: #555;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.3s ease, transform 0.2s ease;
+    line-height: 1;
+}
+
+.selected-city-box .close-btn:hover {
+    color: rgb(0, 0, 0);
+    transform: scale(1.2);
+}
+
+.content1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.checkbox-container input:checked~.custom-checkbox {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+
+.checkbox-container input:checked~.custom-checkbox>span {
+    display: block;
+}
+
+.register-btn {
+    font-family: 'Rubik', sans-serif;
+    margin: 20px auto;
+    padding: 12px 40px;
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.15s ease-in, box-shadow 0.2s ease;
+}
+
+/* אפקט hover רגיל */
+.register-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* לחיצה -> מתכווץ */
+.register-btn.clicked {
+    transform: scale(0.9);
+}
+
+/* ואז מתרחב */
+.register-btn.expand {
+    transform: scale(1.15);
+    transition: transform 0.4s ease-out;
+}
+
+body.transitioning *:not(.register-btn) {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.register-btn.expand-fullscreen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(20);
+    /* מרחיב את הכפתור על כל המסך */
+    transition: transform 0.6s ease-in-out;
+    z-index: 9999;
+}
+
+.selected-city-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.field-wrapper .error-banner {
+    margin-top: 8px;
+    background-color: #ffdddd;
+    color: #a00;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: 'Rubik', sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    direction: rtl;
+    animation: fadeIn 0.3s ease;
+    text-align: right;
+    width: auto;
+}
+
+/* אנימציה להופעה חלקה */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -73,18 +73,48 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
-// --- ולידציה ---
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("form");
+    const ageMinSelect = document.getElementById("ageMin");
+    const ageMaxSelect = document.getElementById("ageMax");
     const requiredFields = form.querySelectorAll("[required]");
     const registerBtn = document.querySelector('button[type="submit"]');
+    const focusableElements = form.querySelectorAll('input, select, textarea, button');
 
+    // מילוי גיל מינימום
+    for (let i = 18; i <= 85; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = i;
+        ageMinSelect.appendChild(option);
+    }
+
+    // מילוי גיל מקסימום לפי גיל מינימום שנבחר
+    ageMinSelect.addEventListener("change", () => {
+        const selectedMin = parseInt(ageMinSelect.value, 10);
+
+        if (!isNaN(selectedMin)) {
+            ageMaxSelect.disabled = false;
+            ageMaxSelect.innerHTML = '<option value="">גיל מקסימום</option>';
+
+            for (let i = selectedMin; i <= 85; i++) {
+                const option = document.createElement("option");
+                option.value = i;
+                option.textContent = i;
+                ageMaxSelect.appendChild(option);
+            }
+        } else {
+            ageMaxSelect.disabled = true;
+            ageMaxSelect.innerHTML = '<option value="">גיל מקסימום</option>';
+        }
+    });
+
+    // --- ולידציה בלחיצה בלבד ---
     function clearErrorBanners() {
         document.querySelectorAll(".error-banner").forEach(el => el.remove());
     }
 
-    function showErrorBanner(input, index) {
+    function showErrorBanner(input) {
         const banner = document.createElement("div");
         banner.className = "error-banner";
         banner.textContent = "שדה חובה";
@@ -117,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     registerBtn.addEventListener("click", (e) => {
         clearErrorBanners();
         let firstInvalid = null;
-        requiredFields.forEach((input, index) => {
+        requiredFields.forEach((input) => {
             let isEmpty = false;
             if (input.type === "radio" || input.type === "checkbox") {
                 const group = form.querySelectorAll(`[name="${input.name}"]`);
@@ -127,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 isEmpty = !input.value.trim();
             }
             if (isEmpty) {
-                showErrorBanner(input, index);
+                showErrorBanner(input);
                 if (!firstInvalid) firstInvalid = input;
             }
         });
@@ -138,15 +168,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    document.addEventListener("keydown", (e) => {
+    // --- אנטר עובר לשדה הבא ולא שולח ---
+    form.addEventListener("keydown", (e) => {
         const active = document.activeElement;
         if (e.key === "Enter") {
-            if (active && ["INPUT", "TEXTAREA", "SELECT"].includes(active.tagName)) {
-                e.preventDefault();
-                active.blur();
-            } else {
-                registerBtn.click();
-            }
+            // אם על כפתור שליחה – תן לשלוח
+            if (active && (active.tagName === "BUTTON" || active.type === "submit")) return;
+
+            // מניעת שליחה
+            e.preventDefault();
+
+            // מעבר לשדה הבא
+            const index = Array.from(focusableElements).indexOf(active);
+            const next = focusableElements[index + 1];
+            if (next) next.focus();
         }
     });
 });
@@ -158,26 +193,5 @@ function updateFileName(input) {
         label.textContent = input.files[0].name;
     } else {
         label.textContent = "לא נבחר קובץ";
-    }
-}
-
-
-// מאזין לשינוי הבחירה ברדיו
-document.querySelectorAll('input[name="uploadTarget"]').forEach(radio => {
-    radio.addEventListener("change", () => {
-        const uploadSection = document.getElementById("uploadImageField");
-        uploadSection.style.display = "block";
-    });
-});
-
-// מעדכן את תווית הקובץ
-function updateFileName(input) {
-    const label = document.getElementById("fileLabel");
-    if (input.files.length > 0) {
-        label.textContent = input.files.length === 1
-            ? input.files[0].name
-            : `${input.files.length} קבצים נבחרו 📷`;
-    } else {
-        label.textContent = "לא נבחר קובץ להעלה 📷";
     }
 }

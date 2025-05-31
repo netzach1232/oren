@@ -36,27 +36,36 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-function addSelectedCityTag(cityName) {
-    const tag = document.createElement("div");
-    tag.className = "city-tag"; // שים לב לשינוי כאן
+document.addEventListener("DOMContentLoaded", () => {
+    const ageMinSelect = document.getElementById("ageMin");
+    const ageMaxSelect = document.getElementById("ageMax");
 
-    const text = document.createElement("span");
-    text.textContent = cityName;
+    // נבנה את רשימת הגילאים (לדוגמה: 18 עד 85)
+    for (let i = 18; i <= 85; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = i;
+        ageMinSelect.appendChild(option);
+    }
 
-    const closeBtn = document.createElement("span");
-    closeBtn.className = "close-btn";
-    closeBtn.innerHTML = "&times;";
-    closeBtn.addEventListener("click", () => {
-        tag.remove();
-        selectedCities.delete(cityName);
-        // עדכון ה-hidden input
-        hiddenInput.value = Array.from(selectedCities).join(",");
+    ageMinSelect.addEventListener("change", () => {
+        const selectedMin = parseInt(ageMinSelect.value, 10);
+
+        if (!isNaN(selectedMin)) {
+            ageMaxSelect.disabled = false;
+            ageMaxSelect.innerHTML = '<option value="">גיל מקסימום</option>';
+
+            // נכניס אופציות החל מהגיל שנבחר ועד 85 (כולל)
+            for (let i = selectedMin; i <= 85; i++) {
+                const option = document.createElement("option");
+                option.value = i;
+                option.textContent = i;
+                ageMaxSelect.appendChild(option);
+            }
+        } else {
+            ageMaxSelect.disabled = true;
+            ageMaxSelect.innerHTML = '<option value="">גיל מקסימום</option>';
+        }
     });
+});
 
-    tag.appendChild(text);
-    tag.appendChild(closeBtn);
-    selectedBox.appendChild(tag);
-
-    // עדכון הערך הנסתר של השדה
-    hiddenInput.value = Array.from(selectedCities).join(",");
-}

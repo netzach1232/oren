@@ -15,54 +15,6 @@ function showErrorBanner(targetElement, message) {
 }
 
 
-(function setupCityAutocomplete() {
-    const input = document.getElementById("cityInput");
-    const suggestionsBox = document.getElementById("citySuggestions");
-    const selectedBox = document.getElementById("selectedCityBox");
-    const hiddenInput = document.getElementById("selectedCityHidden");
-
-    input.addEventListener("input", function () {
-        const value = this.value.trim().toLowerCase();
-        suggestionsBox.innerHTML = "";
-
-        if (value.length < 1) {
-            suggestionsBox.style.display = "none";
-            return;
-        }
-
-        const filtered = cities.filter(city => city.toLowerCase().startsWith(value));
-
-        if (filtered.length === 0) {
-            suggestionsBox.style.display = "none";
-            return;
-        }
-
-        filtered.slice(0, 20).forEach(city => {
-            const item = document.createElement("div");
-            item.textContent = city;
-            item.style.padding = "8px 12px";
-            item.style.cursor = "pointer";
-            item.style.borderBottom = "1px solid #eee";
-            item.addEventListener("click", () => {
-                input.value = city;
-                hiddenInput.value = city;
-                input.setCustomValidity(""); // מנקה שגיאה אם הייתה
-                selectedBox.textContent = `העיר שנבחרה: ${city}`;
-                selectedBox.style.display = "block";
-                suggestionsBox.style.display = "none";
-            });
-            suggestionsBox.appendChild(item);
-        });
-
-        suggestionsBox.style.display = "block";
-    });
-
-    document.addEventListener("click", function (e) {
-        if (!e.target.closest(".field-wrapper")) {
-            suggestionsBox.style.display = "none";
-        }
-    });
-})();
 
 document.getElementById("registerBtn").addEventListener("click", function () {
     removeErrorBanners();

@@ -69,3 +69,55 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    const ageMinSelect = document.getElementById("ageMin");
+    const ageMaxSelect = document.getElementById("ageMax");
+    const form = document.querySelector("form");
+    const focusableElements = form.querySelectorAll('input, select, textarea, button');
+
+    // גילאים לשני השדות
+    for (let i = 18; i <= 85; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = i;
+        ageMinSelect.appendChild(option);
+    }
+
+    ageMinSelect.addEventListener("change", () => {
+        const selectedMin = parseInt(ageMinSelect.value, 10);
+
+        if (!isNaN(selectedMin)) {
+            ageMaxSelect.disabled = false;
+            ageMaxSelect.innerHTML = '<option value="">גיל מקסימום</option>';
+
+            for (let i = selectedMin; i <= 85; i++) {
+                const option = document.createElement("option");
+                option.value = i;
+                option.textContent = i;
+                ageMaxSelect.appendChild(option);
+            }
+        } else {
+            ageMaxSelect.disabled = true;
+            ageMaxSelect.innerHTML = '<option value="">גיל מקסימום</option>';
+        }
+    });
+
+    // מניעת שליחה מיידית עם Enter ועבירה לשדה הבא
+    form.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            const current = document.activeElement;
+
+            // אם עומדים על כפתור שליחה – תן לו לעבוד כרגיל
+            if (current.tagName.toLowerCase() === 'button' || current.type === 'submit') return;
+
+            e.preventDefault();
+
+            // מצא את האינדקס הנוכחי
+            const currentIndex = Array.from(focusableElements).indexOf(current);
+            const next = focusableElements[currentIndex + 1];
+
+            // תן פוקוס לשדה הבא אם קיים
+            if (next) next.focus();
+        }
+    });
+});

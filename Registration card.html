@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>טופס שידוכים</title>
     <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="style3.css">
 </head>
 
 <body>
@@ -139,38 +140,41 @@
             </div>
         </div>
         <br><br>
-        <div class="field-wrapper">
-            <label><span class="required-star">*</span>רמה דתית:</label>
-            <textarea name="religiousLevel" rows="2" placeholder="לדוגמה: חרדי, דתי לאומי, מסורתי, חילוני וכו'"
-                required></textarea>
-        </div>
-        <br><br>
-        <div class="field-wrapper upload-target-field">
+        <!-- בחירת יעד -->
+        <div id="uploadTargetWrapper" class="field-wrapper upload-target-field">
             <label class="upload-target-label">
-                <span class="required-star">*</span> לאן תרצה להעלות את התמונות?
+                <span class="required-star2">*</span><br>
+                <span class="text12542">לאן תרצה<br> להעלות את<br>התמונות?</span>
             </label>
             <div class="upload-target-options">
-                <label>
+                <label class="option-label">
                     <input type="radio" name="uploadTarget" value="website" required>
                     לאתר (גלוי לכולם)
                 </label>
-                <label>
+                <label class="option-label">
                     <input type="radio" name="uploadTarget" value="matchmaker" required>
                     לשדכן (בלבד)
                 </label>
             </div>
         </div>
 
-        <!-- שדה העלאת תמונות מוסתר בהתחלה -->
-        <div class="field-wrapper" id="uploadImageField" style="display: none;">
-            <label>
-                <span class="required-star">*</span> העלאת תמונות<br>(עד 3 תמונות)<br>
+        <!-- שדה העלאת תמונות מוסתר -->
+        <div class="field-wrapper upload-image-field-centered" id="uploadImageField" style="display: none;">
+            <label class="upload-image-label">
+                (עד 3 תמונות)
             </label>
-            <div class="custom-file">
-                <label class="custom-file-label" id="fileLabel">לא נבחר קובץ להעלה 📷</label>
-                <input type="file" name="idImage" accept="image/*" required onchange="updateFileName(this)">
+            <div class="custom-file custom-file-upload-box">
+                <label class="custom-file-label2" id="fileLabel">
+                    לא נבחרו <br>תמונות להעלה 📷
+                    <input type="file" id="imageInput" name="images" accept="image/*" multiple>
+                </label>
             </div>
+
+            <!-- כאן תופיע תצוגת התמונות -->
+            <div id="previewWrapper" class="preview-wrapper"></div>
         </div>
+
+
 
         <br><br><br><br>
         <p class="p1">פרטים לשדכן <br>&#9660; <!-- ▼ -->
@@ -180,26 +184,45 @@
             <label><span class="required-star">*</span>מספר טלפון:</label>
             <input style="text-align: right;" type="tel" name="phone" placeholder="מספר טלפון" required>
         </div>
-        <br><br><br><br>
-        <div class="field-wrapper">
-            <label><span class="required-star">*</span>אימייל:</label>
-            <input style="text-align: left;" type="email" name="email" placeholder="example@email.com" required>
+        <br><br>
+        <!-- יעד חדש: העלאת ת"ז -->
+        <div class="field-wrapper123 upload-target-field123">
+            <label class="upload-target-label2123">
+                <span class="required-star2123">*</span>
+                <span class="text125424">העלאת קובץ<br>צילום תעודת זהות כולל ספח<br>(😄כדי להימנע מאי נעימות😄)</span>
+            </label>
+            <div class="upload-target-options2123">
+                <label class="option-label123">
+                    <input type="checkbox" id="uploadTargetIDCheckbox" name="uploadTargetID" value="idUpload" required>
+                    <label for="uploadTargetIDCheckbox">לשדכן בלבד</label>
+                </label>
+            </div>
         </div>
-        <br><br><br><br>
-        <div class="field-wrapper">
-            <label><span class="required-star">*</span>העלאת קובץ<br>צילום תעודת זהות כולל ספח<br>(😄כדי להימנע מאי
-                נעימות😄)</label>
-            <div class="custom-file">
-                <label class="custom-file-label" id="fileLabel">לא נבחר קובץ להעלה 📷</label>
-                <input type="file" name="idImage" accept="image/*" required onchange="updateFileName(this)">
+
+        <!-- שדה העלאה חדש לת"ז -->
+        <div class="field-wrapper123 upload-image-field-centered123" id="uploadImageFieldID" style="display: none;">
+            <label class="upload-image-label123">העלאת תעודת זהות (עד 3 תמונות)</label>
+            <div class="custom-file custom-file-upload-box123">
+                <div class="custom-file custom-file-upload-box123">
+                    <label class="custom-file-label2123" id="fileLabelID">
+                        לא נבחרו תמונות<br>לחץ כאן להעלה... 📷
+                        <input type="file" id="imageInputID" name="idImages" accept="image/*" required multiple>
+                    </label>
+                </div>
+
+                <input type="file" id="imageInputID" name="idImages" accept="image/*" required multiple>
+                <div class="preview-wrapper123" id="previewID"></div>
             </div>
         </div>
         <br><br><br><br>
-        <button id="registerBtn" type="submit">שלח</button>
+        <div style="text-align: center;">
+            <button id="registerBtn" type="submit">שלח</button>
+        </div>
     </form>
 
     <script src="script2.js"></script>
     <script src="script3.js"></script>
+    <script src="script4.js"></script>
     <script src="all_cities_cleaned.js"></script>
 </body>
 

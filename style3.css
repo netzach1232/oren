@@ -1,0 +1,111 @@
+.field-wrapper123.upload-target-field123,
+.upload-image-field-centered123 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* ממרכז אופקית */
+    justify-content: center;
+    /* ממרכז אנכית */
+    text-align: center;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: 90%;
+    border: 2px solid #5e60632c;
+    box-sizing: border-box;
+
+}
+
+.upload-target-label2123 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.custom-file-label2123 {
+    display: inline-block;
+    padding: 12px 18px;
+    background-color: #f1f1f1;
+    border: 2px dashed #999;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+
+.required-star2123 {
+    color: red;
+    margin-left: 6px;
+    font-size: 22px;
+}
+
+.text125424 {
+    font-size: clamp(16px, 6vw, 28px);
+    font-weight: bolder;
+    color: #000;
+    line-height: 1.6;
+    white-space: pre-line;
+}
+
+.upload-target-options2123 {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.option-label123 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    font-size: clamp(18px, 4vw, 28px);
+
+}
+
+.option-label123:hover {
+    background-color: #e6f0ff;
+}
+
+.submit-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+#registerBtn {
+    padding: 12px 32px;
+    background: linear-gradient(135deg, #4caf50, #81c784);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#registerBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}

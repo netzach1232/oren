@@ -10,17 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
             this.value = this.value.slice(0, 2);
         }
     });
-
-    // ולידציה סופית לפני שליחה — בטופס
-    const form = document.querySelector("form");
-    form.addEventListener("submit", function (e) {
-        const val = parseInt(ageInput.value, 10);
-        if (isNaN(val) || val < 18 || val > 99) {
-            e.preventDefault();
-            alert("יש להזין גיל תקני בין 18 ל-99");
-            ageInput.focus();
-        }
-    });
 });
 
 
@@ -121,3 +110,106 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+
+const maxFiles = 3;
+let allImages = [];
+
+// הצגת שדה העלאת תמונות לאחר בחירת יעד
+document.querySelectorAll('input[name="uploadTarget"]').forEach(radio => {
+    radio.addEventListener("change", () => {
+        document.getElementById("uploadImageField").style.display = "flex";
+    });
+});
+
+// האזנה לקלט קבצים
+document.getElementById("imageInput").addEventListener("change", async function () {
+    await handleFiles(this.files);
+    this.value = ""; // איפוס – מאפשר לבחור שוב
+});
+
+async function handleFiles(files) {
+    const previewWrapper = document.getElementById("previewWrapper");
+
+    for (let file of files) {
+        if (allImages.length >= maxFiles) {
+            alert("ניתן לבחור עד 3 תמונות בלבד.");
+            break;
+        }
+
+        const compressed = await compressImage(file);
+        const imgURL = URL.createObjectURL(compressed);
+        allImages.push({ file: compressed, url: imgURL });
+
+        // עטיפה חיצונית לכל תמונה + אייקון
+        const container = document.createElement("div");
+        container.className = "preview-container";
+
+        const box = document.createElement("div");
+        box.className = "preview-image-box";
+
+        const img = document.createElement("img");
+        img.src = imgURL;
+
+        const removeIcon = document.createElement("img");
+        removeIcon.src = "images/remove-user.png";
+        removeIcon.className = "remove-icon-img";
+        removeIcon.title = "מחק תמונה";
+
+        removeIcon.onclick = function () {
+            allImages = allImages.filter(i => i.url !== imgURL);
+            URL.revokeObjectURL(imgURL);
+            container.remove();
+        };
+
+        box.appendChild(img);
+        container.appendChild(box);
+        container.appendChild(removeIcon);
+        previewWrapper.appendChild(container);
+    }
+}
+
+
+
+
+function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.7) {
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            const img = new Image();
+            img.onload = function () {
+                let width = img.width;
+                let height = img.height;
+
+                // התאמת גודל לשמירה על יחס
+                if (width > maxWidth || height > maxHeight) {
+                    if (width / height > maxWidth / maxHeight) {
+                        height = Math.round((maxWidth / width) * height);
+                        width = maxWidth;
+                    } else {
+                        width = Math.round((maxHeight / height) * width);
+                        height = maxHeight;
+                    }
+                }
+
+                const canvas = document.createElement("canvas");
+                canvas.width = width;
+                canvas.height = height;
+
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, width, height);
+
+                canvas.toBlob((blob) => {
+                    const compressedFile = new File([blob], file.name, {
+                        type: "image/jpeg",
+                        lastModified: Date.now(),
+                    });
+                    resolve(compressedFile);
+                }, "image/jpeg", quality);
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+}
+

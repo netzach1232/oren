@@ -170,22 +170,131 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("cityInput");
+    const suggestionsBox = document.getElementById("citySuggestions");
+    const selectedBox = document.getElementById("selectedCityBox");
+    const hiddenInput = document.getElementById("selectedCityHidden");
+
+    const selectedCities = new Set();
+
+    // הצגת הצעות תוך כדי הקלדה
+    input.addEventListener("input", function () {
+        const value = this.value.trim().toLowerCase();
+        suggestionsBox.innerHTML = "";
+
+        if (value.length < 1) {
+            suggestionsBox.style.display = "none";
+            return;
+        }
+
+        const filtered = cities.filter(city =>
+            city.toLowerCase().startsWith(value)
+        );
+
+        if (filtered.length === 0) {
+            suggestionsBox.style.display = "none";
+            return;
+        }
+
+        filtered.slice(0, 20).forEach(city => {
+            const item = document.createElement("div");
+            item.className = "suggestion-item";
+            item.textContent = city;
+
+            item.addEventListener("click", () => {
+                if (!selectedCities.has(city)) {
+                    selectedCities.add(city);
+                    addSelectedCityTag(city);
+                    input.value = "";
+                }
+                suggestionsBox.style.display = "none";
+            });
+
+            suggestionsBox.appendChild(item);
+        });
+
+        suggestionsBox.style.display = "block";
+    });
+
+    // הקשה על אנטר בוחרת את העיר אם קיימת
+    input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            const value = input.value.trim();
+            if (!value) return;
+
+            const match = cities.find(city => city === value || city.toLowerCase() === value.toLowerCase());
+
+            if (match && !selectedCities.has(match)) {
+                selectedCities.add(match);
+                addSelectedCityTag(match);
+                input.value = "";
+                suggestionsBox.style.display = "none";
+            }
+        }
+    });
+
+    // יצירת תגית עם העיר שנבחרה
+    function addSelectedCityTag(cityName) {
+        const tag = document.createElement("div");
+        tag.className = "city-tag";
+
+        const text = document.createElement("span");
+        text.textContent = cityName;
+
+        const closeBtn = document.createElement("span");
+        closeBtn.className = "close-btn";
+        closeBtn.innerHTML = "×";
+        closeBtn.addEventListener("click", () => {
+            tag.remove();
+            selectedCities.delete(cityName);
+            hiddenInput.value = Array.from(selectedCities).join(",");
+        });
+
+        tag.appendChild(text);
+        tag.appendChild(closeBtn);
+        selectedBox.appendChild(tag);
+        hiddenInput.value = Array.from(selectedCities).join(",");
+    }
+
+    // סגירת תיבת ההצעות בלחיצה מחוץ
+    document.addEventListener("click", function (e) {
+        if (!e.target.closest(".field-wrapper")) {
+            suggestionsBox.style.display = "none";
+        }
+    });
+
     const form = document.querySelector("form");
 
     form.setAttribute("novalidate", "true");
 
+    // רשימת קידומות תקינות למספר טלפון
+    const validPrefixes = [
+        "050", "051", "052", "053", "054", "055", "056", "057", "058", "059",
+        "02", "03", "04", "08", "09",
+        "072", "073", "074", "075", "076", "077", "078", "079"
+    ];
+
+    // פונקציה לבדיקת תקינות מספר טלפון
+    function isValidPhone(value) {
+        if (!/^\d{10}$/.test(value)) return false;
+        const prefix2 = value.slice(0, 2);
+        const prefix3 = value.slice(0, 3);
+        return validPrefixes.includes(prefix2) || validPrefixes.includes(prefix3);
+    }
+
     // Custom slow scroll function
-    function slowScrollTo(element, duration = 2000) { // Duration in milliseconds (2000 = 2 seconds)
+    function slowScrollTo(element, duration = 2000) {
         const targetPosition = element.getBoundingClientRect().top + window.pageYOffset;
         const startPosition = window.pageYOffset;
-        const distance = targetPosition - startPosition - (window.innerHeight / 2) + (element.offsetHeight / 2); // Center the element
+        const distance = targetPosition - startPosition - (window.innerHeight / 2) + (element.offsetHeight / 2);
         let startTime = null;
 
         function animation(currentTime) {
             if (startTime === null) startTime = currentTime;
             const timeElapsed = currentTime - startTime;
-            const progress = Math.min(timeElapsed / duration, 1); // Progress from 0 to 1
-            const ease = easeInOutQuad(progress); // Easing function for smooth animation
+            const progress = Math.min(timeElapsed / duration, 1);
+            const ease = easeInOutQuad(progress);
 
             window.scrollTo(0, startPosition + distance * ease);
 
@@ -194,7 +303,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // Easing function for smooth animation
         function easeInOutQuad(t) {
             return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
         }
@@ -210,6 +318,22 @@ document.addEventListener("DOMContentLoaded", () => {
         // Remove all previous banners
         document.querySelectorAll(".error-banner").forEach(banner => banner.remove());
 
+        // בדיקת מספר טלפון
+        const phoneInput = document.getElementById("phone");
+        if (phoneInput.value.trim() !== "" && !isValidPhone(phoneInput.value)) {
+            hasErrors = true;
+            const wrapper = phoneInput.closest(".field-wrapper, .field-wrapper123");
+            const banner = document.createElement("div");
+            banner.className = "error-banner";
+            banner.textContent = "מספר טלפון לא תקין";
+            wrapper.style.position = "relative";
+            wrapper.appendChild(banner);
+            if (!firstErrorField) {
+                firstErrorField = wrapper;
+            }
+        }
+
+        // בדיקת שאר השדות החובה
         const requiredFields = form.querySelectorAll("[required]");
         const checkedGroups = new Set();
 
@@ -236,23 +360,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const banner = document.createElement("div");
                 banner.className = "error-banner";
                 banner.textContent = "שדה חובה";
-                banner.style.position = "absolute";
-                banner.style.top = "0";
-                banner.style.left = "0";
-                banner.style.backgroundColor = "#ffdddd";
-                banner.style.color = "#a00";
-                banner.style.padding = "6px 12px";
-                banner.style.borderRadius = "8px";
-                banner.style.fontSize = "0.9rem";
-                banner.style.zIndex = "100";
-                banner.style.fontFamily = "'Heebo', sans-serif";
-                banner.style.boxShadow = "0 2px 8px rgba(0, 0, 0, 0.1)";
-                banner.style.whiteSpace = "nowrap";
-                banner.style.direction = "rtl";
-                banner.style.animation = "fadeIn 0.3s ease";
                 wrapper.style.position = "relative";
-                wrapper.prepend(banner);
-
+                wrapper.appendChild(banner);
                 if (!firstErrorField) {
                     firstErrorField = wrapper;
                 }
@@ -260,8 +369,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (hasErrors && firstErrorField) {
-            // Use the custom slow scroll function
-            slowScrollTo(firstErrorField, 3000); // 3 seconds duration for very slow scroll
+            slowScrollTo(firstErrorField, 2000);
         } else if (!hasErrors) {
             form.submit();
         }

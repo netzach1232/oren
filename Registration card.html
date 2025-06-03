@@ -13,7 +13,7 @@
     <h2 class="title1">טופס הרשמה לאתר שידוכים</h2>
     <hr>
     <br><br>
-    <form autocomplete="off">
+    <form id="registerForm" autocomplete="off">
         <div class="field-wrapper">
             <label for="name">
                 <span class="required-star">*</span>שם:
@@ -68,8 +68,8 @@
         <br><br>
         <div class="field-wrapper">
             <span style="color: rgb(0, 0, 0); font-weight: bolder; font-size: large; margin-bottom: 10px;"><span
-                    style="color: red;">*</span> עיר</span>
-            <input type="text" id="cityInput" placeholder="עיר" required />
+                    style="color: red;">*</span> עיר<br>(יותר מאיזור)</span>
+            <input type="text" id="cityInput" placeholder="עיר" />
             <input type="hidden" id="selectedCityHidden" name="city" required>
             <div id="citySuggestions" class="autocomplete-suggestions"></div>
         </div>
@@ -106,22 +106,22 @@
             <textarea name="occupation" rows="2" placeholder="לדוגמה: מורה, עצמאי, מהנדס וכו'" required></textarea>
         </div>
         <br><br>
-        <label>(אופציונלי)<br>דברים חשובים שיהיה בצד השני:</label>
+        <label>(מומלץ)<br>דברים חשובים שיהיה בצד השני:</label>
         <textarea name="importantInPartner" rows="3" placeholder="לדוגמה: ערכים, נאמנות, שמחת חיים..."></textarea>
         <br><br>
-        <label>(אופציונלי)<br>דברים חשובים שידעו עליי:</label>
+        <label>(מומלץ)<br>דברים חשובים שידעו עליי:</label>
         <textarea name="importantAboutMe" rows="3" placeholder="שתף/י משהו מיוחד או אישי..."></textarea>
         <br><br>
-        <label>(אופציונלי)<br>פירוט מצב בריאותי:</label>
+        <label>(מומלץ)<br>פירוט מצב בריאותי:</label>
         <textarea class="healthDetails" name="healthDetails" rows="2"
             placeholder="אם יש מצב רפואי מסוים, אפשר לפרט כאן..."></textarea>
         <br><br>
-        <label>(אופציונלי)<br>השקפה שאת/ה מחפש/ת:</label>
+        <label>(מומלץ)<br>השקפה שאת/ה מחפש/ת:</label>
         <textarea name="ideology" rows="2" placeholder="לדוגמה: השקפה דתית, השקפת עולם, וכו"></textarea>
         <br><br><br>
         <hr><br>
         <div class="field-wrapper">
-            <label><span class="required-star">*</span>טווח גילאים רצוי:</label>
+            <label><span class="required-star">*</span>טווח גילאים שאני מעוניין/ת :</label>
             <div style="display: flex; gap: 10px;">
                 <select id="ageMin" name="ageMin" required>
                     <option value="">גיל מינימום</option>
@@ -153,7 +153,7 @@
                 </label>
                 <label class="option-label">
                     <input type="radio" name="uploadTarget" value="matchmaker" required>
-                    לשדכן (בלבד)
+                    לשדכן בלבד
                 </label>
             </div>
         </div>
@@ -182,7 +182,7 @@
         </p>
         <div class="field-wrapper">
             <label><span class="required-star">*</span>מספר טלפון:</label>
-            <input style="text-align: right;" type="tel" name="phone" placeholder="מספר טלפון" required>
+            <input type="tel" id="phone" name="phone" placeholder="מספר טלפון" required />
         </div>
         <br><br>
         <!-- יעד חדש: העלאת ת"ז -->
@@ -194,8 +194,8 @@
             <div class="upload-target-options2123">
                 <label class="option-label123">
                     <input type="checkbox" id="uploadTargetIDCheckbox" name="uploadTargetID" value="idUpload" required>
-                    <label for="uploadTargetIDCheckbox">לשדכן בלבד</label>
-                </label>
+                    <label for="uploadTargetIDCheckbox">לשדכן בלבד
+                    </label>
             </div>
         </div>
 
@@ -206,13 +206,12 @@
                 <div class="custom-file custom-file-upload-box123">
                     <label class="custom-file-label2123" id="fileLabelID">
                         לא נבחרו תמונות<br>לחץ כאן להעלה... 📷
-                        <input type="file" id="imageInputID" name="idImages" accept="image/*" required multiple>
+                        <input type="file" id="imageInputID" name="idImages" accept="image/*">
                     </label>
                 </div>
 
-                <input type="file" id="imageInputID" name="idImages" accept="image/*" required multiple>
-                <div class="preview-wrapper123" id="previewID"></div>
             </div>
+            <div class="preview-wrapper123" id="previewID"></div>
         </div>
         <br><br><br><br>
         <div style="text-align: center;">

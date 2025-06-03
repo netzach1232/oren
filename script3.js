@@ -213,3 +213,62 @@ function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.7) {
     });
 }
 
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const phoneInput = document.getElementById("phone");
+    const form = document.getElementById("registerForm");
+
+    // רשימת קידומות תקינות
+    const validPrefixes = [
+        "050", "051", "052", "053", "054", "055", "056", "057", "058", "059",
+        "02", "03", "04", "08", "09",
+        "072", "073", "074", "075", "076", "077", "078", "079"
+    ];
+
+    // יצירת הודעת שגיאה
+    const errorMessage = document.createElement("div");
+    errorMessage.className = "error-banner";
+    errorMessage.textContent = "10 ספרות עם קידומת חוקית";
+    errorMessage.style.display = "none";
+    phoneInput.parentNode.appendChild(errorMessage);
+
+    // פונקציה לבדיקת תקינות מספר טלפון
+    function isValidPhone(value) {
+        // בדיקה שיש בדיוק 10 ספרות
+        if (!/^\d{10}$/.test(value)) return false;
+        // בדיקת קידומת
+        const prefix2 = value.slice(0, 2);
+        const prefix3 = value.slice(0, 3);
+        return validPrefixes.includes(prefix2) || validPrefixes.includes(prefix3);
+    }
+
+    // ניקוי תווים לא מספריים והגבלת אורך
+    phoneInput.addEventListener("input", function () {
+        this.value = this.value.replace(/\D/g, '').slice(0, 10);
+        // הצגת הודעת שגיאה בזמן אמת
+        errorMessage.style.display = isValidPhone(this.value) ? "none" : "block";
+    });
+
+    // בדיקה בעת שליחת הטופס
+    form.addEventListener("submit", function (e) {
+        if (!isValidPhone(phoneInput.value)) {
+            e.preventDefault(); // חסימת שליחת הטופס
+            errorMessage.style.display = "block";
+            phoneInput.focus();
+            // גלילה לשדה עם השגיאה
+            phoneInput.scrollIntoView({ behavior: "smooth", block: "center" });
+        } else {
+            errorMessage.style.display = "none";
+        }
+    });
+
+    // מניעת שליחה עם Enter בשדה הטלפון אם המספר לא תקין
+    phoneInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" && !isValidPhone(this.value)) {
+            e.preventDefault();
+            errorMessage.style.display = "block";
+            this.focus();
+        }
+    });
+});

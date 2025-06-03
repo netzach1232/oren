@@ -1,38 +1,291 @@
-/* ✅ כוכבית שדה חובה */
-.required-star {
-    color: red;
-    margin-right: 4px;
-    font-weight: bolder;
-    font-size: larger;
+/* ✅ עטיפת שדה חובה */
+.field-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
 }
 
-/* ✅ שדה טקסט */
-input[type="text"] {
-    width: 70%;
+/* ✅ באנר שגיאה מדויק */
+.error-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #ffdddd;
+    color: #a00;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    z-index: 100;
+    font-family: 'Heebo', sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+    direction: rtl;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ✅ עיצוב טופס כללי */
+form {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+@media (max-width: 480px) {
+    form {
+        padding: 10px;
+    }
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.required-star {
+    color: red;
+    margin-left: 4px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="tel"],
+input[type="password"],
+input[type="file"],
+select,
+textarea {
     padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: left 10px center;
+    background-size: 16px 16px;
+    padding-left: 40px;
+}
+
+.gender-options,
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    /* מתחיל מימין ב־RTL */
+    align-items: flex-start;
+    gap: 12px;
+    box-sizing: border-box;
+    width: 100%;
+
+    /* זה מצמיד לשמאל במסמך RTL */
+}
+
+.gender-options label,
+.checkbox-group label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 16px;
+    padding: 10px 14px;
+    min-width: 90px;
+    /* ברירת מחדל למחשב */
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+/* ✅ הגדלת האורך רק בטלפונים */
+@media screen and (max-width: 768px) {
+
+    .gender-options label,
+    .checkbox-group label {
+        min-width: 90%;
+
+    }
+
+}
+
+
+.gender-options label:hover,
+.checkbox-group label:hover {
+    background-color: #d0d0d0;
+}
+
+.gender-options input[type="radio"],
+.checkbox-group input[type="radio"] {
+    accent-color: rgb(68, 0, 255);
+}
+
+.checkbox-group {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #fefefe;
+    margin-bottom: 20px;
+}
+
+/* ✅ התאמות מובייל */
+@media (max-width: 600px) {
+
+    .gender-options,
+    .checkbox-group {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    form label {
+        font-size: 18px;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 0.95rem;
+    }
+}
+
+/* ✅ תיבות טקסט */
+textarea {
+    resize: none;
+    min-height: 100px;
+    height: 140px;
+}
+
+/* ✅ כפתור שליחה */
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* ✅ עיצוב כותרת */
+.title1 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    text-align: center;
+    margin: 2rem 0;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    animation: fadeInDown 1.5s ease-out;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+@media (min-width: 1024px) {
+    .title1 {
+        max-width: 500px;
+        margin: 2rem auto;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-80px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ✅ תיבת קובץ מותאמת */
+.custom-file {
+    position: relative;
+    display: inline-block;
+    direction: rtl;
+}
+
+.custom-file input[type="file"] {
+    opacity: 0;
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+.custom-file-label {
     border: 1px solid #ccc;
     border-radius: 10px;
-    box-sizing: border-box;
-    display: block;
+    padding: 10px 16px;
+    background-color: #f9f9f9;
+    display: inline-block;
+    min-width: 200px;
 }
 
 #citySuggestions {
     display: none;
-    position: relative;
-    top: 75%;
+    position: absolute;
+    width: 70%;
+    top: 100%;
+    /* ישר מתחת לשדה הקלט */
     right: 0;
     left: 0;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     max-height: 200px;
     overflow-y: auto;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     z-index: 1000;
-    margin-top: 8px;
-    direction: rtl;
-    text-align: right;
+    margin-top: 5px;
+    padding: 0;
+    /* ✅ הסתרת סרגל גלילה בכל הדפדפנים */
     -ms-overflow-style: none;
     /* IE ו־Edge */
     scrollbar-width: none;
@@ -41,236 +294,385 @@ input[type="text"] {
 
 .suggestion-item {
     padding: 10px 16px;
+    font-size: 16px;
+    color: #2c3e50;
     cursor: pointer;
     border-bottom: 1px solid #eee;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .suggestion-item:hover {
     background-color: #f0f0f0;
+    color: #007bff;
 }
 
-.register-btn {
-    background-color: #007bff;
-    color: white;
-    padding: 12px 24px;
-    font-size: 18px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 20px;
-    width: 100%;
-    max-width: 100px;
-
-    display: flex;
-    justify-content: center;
-    /* יישור אופקי */
-    align-items: center;
-    /* יישור אנכי */
-    text-align: center;
+.suggestion-item:last-child {
+    border-bottom: none;
 }
-
-.register-btn:hover {
-    background-color: #0056b3;
-}
-
-/* ✅ צ'קבוקס בהתאמה אישית */
-.checkbox-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 16px;
-}
-
-.custom-checkbox {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #555;
-    border-radius: 4px;
-    display: inline-block;
-    position: relative;
-}
-
-.checkbox-container input[type="checkbox"] {
-    opacity: 0;
-    width: 0;
-    height: 0;
-    position: absolute;
-}
-
-.checkbox-container input[type="checkbox"]:checked+.custom-checkbox::after {
-    content: "#";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ff00008f;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-/* ✅ רספונסיביות */
-@media screen and (min-width: 768px) {
-    .register-btn {
-        font-size: 20px;
-        padding: 14px 28px;
-    }
-
-    .checkbox-container {
-        font-size: 18px;
-    }
-
-    input[type="text"] {
-        font-size: 18px;
-    }
-}
-
 
 .selected-city-box {
     margin-top: 10px;
-    padding: 7px 16px;
-    background-color: #1359dbc4;
-    color: #fff8f8;
-    border: 1px solid #bbb;
-    border-radius: 12px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
-    font-size: 16px;
-    font-weight: 500;
-    direction: rtl;
+}
+
+.city-tag {
+    background-color: #dbeafe;
+    color: #1e40af;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    max-width: 100%;
 }
 
-.selected-city-box .close-btn {
-    background: none;
-    border: none;
-    color: #555;
-    font-size: 20px;
-    font-weight: bold;
+.city-tag .close-btn {
     cursor: pointer;
-    padding: 0;
-    transition: color 0.3s ease, transform 0.2s ease;
-    line-height: 1;
+    font-weight: bold;
 }
 
-.selected-city-box .close-btn:hover {
-    color: rgb(0, 0, 0);
-    transform: scale(1.2);
+/* ✅ כותרת לשדכן */
+.p1 {
+    font-family: 'Heebo', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #c0392b;
+    text-align: center;
+    margin: 1.5rem 0;
+    padding: 0.8rem;
+    background-color: #fff5f5;
+    border: 2px solid #e74c3c;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
 }
 
-.content1 {
+.p1:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    background-color: #ffe6e6;
+}
+
+/* עטיפת ההעלאה - ממרכז הכל */
+.upload-image-field-centered {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    max-width: 90%;
+    border: 2px solid #86c0ff67;
+    box-sizing: border-box;
 }
 
-.checkbox-container input:checked~.custom-checkbox {
-    background-color: #2980b9;
-    border-color: #2980b9;
+/* תיאור שדה ההעלאה */
+.upload-image-label {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    line-height: 1.6;
+    text-align: center;
+    position: relative;
 }
 
-.checkbox-container input:checked~.custom-checkbox>span {
-    display: block;
+/* קופסת הקלט */
+.custom-file-upload-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
-.register-btn {
-    font-family: 'Rubik', sans-serif;
-    margin: 20px auto;
-    padding: 12px 40px;
-    font-size: 1.4em;
-    font-weight: 600;
-    color: #ffffff;
-    background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
-    border: none;
-    border-radius: 10px;
+/* הלייבל של הקובץ */
+.custom-file-label2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 12px 18px;
+    background-color: #f9f9f9;
+    width: 90%;
+    max-width: 400px;
+    font-size: 22px;
+    font-weight: bolder;
+    color: #000000;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.15s ease-in, box-shadow 0.2s ease;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
 }
 
-/* אפקט hover רגיל */
-.register-btn:hover {
+/* התאמה למסכים קטנים */
+@media (max-width: 480px) {
+    .custom-file-label2 {
+        font-size: 18px;
+        padding: 10px 12px;
+        width: 100%;
+    }
+
+    .upload-image-label {
+        font-size: 26px;
+    }
+}
+
+
+.field-wrapper.upload-target-field {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-family: 'Arial', sans-serif;
+    direction: rtl;
+    border: 0.1px solid rgba(0, 0, 0, 0.342);
+
+}
+
+.upload-target-label {
+    margin-bottom: 15px;
+    font-size: 40px;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    /* מרכז אנכית */
+    justify-content: center;
+    /* מרכז אופקית */
+    text-align: center;
+    width: 100%;
+
+}
+
+.text12542 {
+    font-weight: bolder;
+    font-size: 35px;
+}
+
+.required-star2 {
+    color: #c0392b;
+    font-size: 25px;
+    font-weight: bolder;
+    position: absolute;
+    top: -10px;
+    right: 2px;
+}
+
+
+
+.upload-target-options {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px 20px;
+    background-color: #ffffff9a;
+    border: 0.1px solid #000000;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.option-label:hover {
+    background-color: #e8ecef;
+    border-color: rgba(0, 0, 0, 0.329);
+}
+
+.option-label input[type="radio"] {
+    margin-left: 10px;
+    accent-color: #000000;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+
+.option-label input[type="radio"]:checked+.option-label {
+    background-color: #0984e3;
+    color: #ffffff;
+    border-color: #0984e3;
+    box-shadow: 0 2px 8px rgba(9, 132, 227, 0.3);
+}
+
+/* התאמות למובייל */
+@media (max-width: 600px) {
+    .field-wrapper.upload-target-field {
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        /* ממרכז אנכית */
+        justify-content: center;
+        /* ממרכז אופקית */
+        text-align: center;
+
+    }
+
+    .upload-target-label {
+        font-size: 30px;
+        font-weight: bolder;
+        display: flex;
+        align-items: center;
+        /* ממרכז אנכית */
+        justify-content: center;
+        /* ממרכז אופקית */
+        text-align: center;
+    }
+
+    .required-star2 {
+        color: #c0392b;
+        font-size: 25px;
+        font-weight: bolder;
+        position: absolute;
+        top: -10px;
+        right: 2px;
+    }
+
+
+
+    .upload-target-options {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-label {
+        font-size: 14px;
+        padding: 10px 15px;
+        font-size: 18px;
+    }
+
+    .option-label input[type="radio"] {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+
+
+
+.preview-image-box:hover {
+    transform: scale(1.03);
+}
+
+
+/* כפתור מחיקה */
+.preview-remove-btn {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    transition: background-color 0.2s ease;
+}
+
+.preview-remove-btn:hover {
+    background-color: #c0392b;
+}
+
+
+
+
+.preview-image-box:hover {
     transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* לחיצה -> מתכווץ */
-.register-btn.clicked {
-    transform: scale(0.9);
+
+
+.preview-remove-btn {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease;
 }
 
-/* ואז מתרחב */
-.register-btn.expand {
-    transform: scale(1.15);
-    transition: transform 0.4s ease-out;
+.preview-remove-btn:hover {
+    background-color: #c0392b;
 }
 
-body.transitioning *:not(.register-btn) {
-    opacity: 0;
-    transition: opacity 0.3s ease;
+
+.preview-image-box img:first-child {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
-.register-btn.expand-fullscreen {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(20);
-    /* מרחיב את הכפתור על כל המסך */
-    transition: transform 0.6s ease-in-out;
-    z-index: 9999;
-}
-
-.selected-city-boxes {
+.preview-wrapper {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 16px;
     justify-content: center;
     margin-top: 15px;
 }
 
-.field-wrapper .error-banner {
-    display: inline-block;
-    /* שיתאים לגודל התוכן או האלמנט */
-    max-width: 100%;
-    /* לא יעבור את גבול הקופסה */
-    margin-top: 8px;
-    background-color: #ffdddd;
-    color: #a00;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-family: 'Rubik', sans-serif;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    direction: rtl;
-    animation: fadeIn 0.3s ease;
-    text-align: right;
-    white-space: normal;
-    /* כדי שירד שורה אם צריך */
-    word-wrap: break-word;
-    /* שבירה אוטומטית */
+.preview-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
+.preview-image-box {
+    width: 100px;
+    height: 100px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-/* אנימציה להופעה חלקה */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
+.preview-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* עכשיו האייקון לא "מעל" התמונה אלא ליד */
+.remove-icon-img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.remove-icon-img:hover {
+    transform: scale(1.2);
 }
